@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1099097656987",
+    "firebase_url": "https://kampung-siaga-covid-b0c8c.firebaseio.com",
+    "project_id": "kampung-siaga-covid-b0c8c",
+    "storage_bucket": "kampung-siaga-covid-b0c8c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1099097656987:android:021c2c17a782f43767c03e",
+        "android_client_info": {
+          "package_name": "com.seadev.kampungsiagacovid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1099097656987-mbd2rajbhqlqa3lggrbdrufthp03dktb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZAzRTx66VMoqYnM2SUKZaOAuAgvFKYjM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1099097656987-mbd2rajbhqlqa3lggrbdrufthp03dktb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
