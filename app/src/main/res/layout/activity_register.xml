@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".ui.RegisterActivity">
+
+    <EditText
+        android:id="@+id/et_nama_lengkap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nama Lengkap"
+        android:inputType="textPersonName"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <EditText
+        android:id="@+id/et_alamat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Alamat Lengkap"
+        android:inputType="textPersonName"
+        app:layout_constraintTop_toBottomOf="@+id/et_nama_lengkap"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/sp_provinsi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="11dp"
+        android:paddingBottom="11dp"
+        app:layout_constraintTop_toBottomOf="@+id/et_alamat"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/sp_kota_kab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="11dp"
+        android:paddingBottom="11dp"
+        android:prompt="@string/app_name"
+        app:layout_constraintTop_toBottomOf="@+id/sp_provinsi"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/sp_kecamatan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="11dp"
+        android:paddingBottom="11dp"
+        app:layout_constraintTop_toBottomOf="@+id/sp_kota_kab"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/sp_desa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="11dp"
+        android:paddingBottom="11dp"
+        app:layout_constraintTop_toBottomOf="@+id/sp_kecamatan"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <EditText
+        android:id="@+id/et_rt_rw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="RT /  RW"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@+id/sp_desa"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <EditText
+        android:id="@+id/et_no_telp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nomor Telepon"
+        android:inputType="phone"
+        app:layout_constraintTop_toBottomOf="@+id/et_rt_rw"
+        tools:layout_editor_absoluteX="16dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
