@@ -7,10 +7,10 @@ import android.widget.TextView;
 
 import com.seadev.kampungsiagacovid.R;
 import com.seadev.kampungsiagacovid.adapter.ProvinsiAdapter;
-import com.seadev.kampungsiagacovid.model.DataHarian;
-import com.seadev.kampungsiagacovid.model.DataProvinsi;
-import com.seadev.kampungsiagacovid.model.ItemDataHarian;
-import com.seadev.kampungsiagacovid.model.ItemDataProvinsi;
+import com.seadev.kampungsiagacovid.model.dataapi.DataHarian;
+import com.seadev.kampungsiagacovid.model.dataapi.DataProvinsi;
+import com.seadev.kampungsiagacovid.model.requestbody.ItemDataHarian;
+import com.seadev.kampungsiagacovid.model.requestbody.ItemDataProvinsi;
 import com.seadev.kampungsiagacovid.rest.ApiClientNasional;
 import com.seadev.kampungsiagacovid.rest.ApiInterfaceNasional;
 

@@ -1,7 +1,7 @@
 package com.seadev.kampungsiagacovid.rest;
 
-import com.seadev.kampungsiagacovid.model.ItemDataHarian;
-import com.seadev.kampungsiagacovid.model.ItemDataProvinsi;
+import com.seadev.kampungsiagacovid.model.requestbody.ItemDataHarian;
+import com.seadev.kampungsiagacovid.model.requestbody.ItemDataProvinsi;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

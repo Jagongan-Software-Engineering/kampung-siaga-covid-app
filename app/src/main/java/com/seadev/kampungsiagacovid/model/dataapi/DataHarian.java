@@ -1,4 +1,4 @@
-package com.seadev.kampungsiagacovid.model;
+package com.seadev.kampungsiagacovid.model.dataapi;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.seadev.kampungsiagacovid.R;
-import com.seadev.kampungsiagacovid.model.DataProvinsi;
+import com.seadev.kampungsiagacovid.model.dataapi.DataProvinsi;
 
 import java.util.ArrayList;
 import java.util.List;

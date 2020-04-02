@@ -1,6 +1,7 @@
-package com.seadev.kampungsiagacovid.model;
+package com.seadev.kampungsiagacovid.model.requestbody;
 
 import com.google.gson.annotations.SerializedName;
+import com.seadev.kampungsiagacovid.model.dataapi.DataProvinsi;
 
 import java.util.List;
 
