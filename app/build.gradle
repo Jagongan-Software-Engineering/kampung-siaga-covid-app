@@ -14,6 +14,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "BASE_URL_NASIONAL", "\"https://services5.arcgis.com/VS6HdKS0VfIhv8Ct/arcgis/rest/services/\""
+        buildConfigField "String", "BASE_URL_LOKASI", "\"https://firebasestorage.googleapis.com/v0/b/kampung-siaga-covid-b0c8c.appspot.com/o/\""
     }
 
     buildTypes {
