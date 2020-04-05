@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.seadev.kampungsiagacovid.R;
 import com.seadev.kampungsiagacovid.adapter.ProvinsiAdapter;
 import com.seadev.kampungsiagacovid.model.dataapi.DataHarian;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        initFirebase();
         loadDataNasional();
         initView();
         loadDataProvinsi();
@@ -58,6 +60,20 @@ public class MainActivity extends AppCompatActivity {
         provinsiAdapter = new ProvinsiAdapter(this);
         rvProvinsi.setHasFixedSize(true);
         rvProvinsi.setItemAnimator(new DefaultItemAnimator());
+    }
+
+    private void initFirebase() {
+        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(task -> {
+            if (!task.isSuccessful()) {
+                Log.w("TAG", "getInstanceId failed", task.getException());
+                return;
+            }
+            // Get new Instance ID token
+            String token = task.getResult().getToken();
+            // Log and toast
+            String msg = getString(R.string.msg_token_fmt, token);
+            Log.d("TAG", msg);
+        });
     }
 
     private void loadDataProvinsi() {
@@ -113,4 +129,5 @@ public class MainActivity extends AppCompatActivity {
         tvInCare.setText("Dalam Perawatan: " + dataHarian.getAttributes().getDalamPerawatan());
         tvDied.setText("Meninggal: " + dataHarian.getAttributes().getMeninggal());
     }
+
 }
