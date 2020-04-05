@@ -245,5 +245,4 @@ public class RegisterActivity extends AppCompatActivity {
         spDesa.setAdapter(adapter);
     }
 
-
 }
