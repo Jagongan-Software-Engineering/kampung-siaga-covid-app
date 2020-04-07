@@ -1,26 +1,34 @@
 package com.seadev.kampungsiagacovid.ui;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.seadev.kampungsiagacovid.R;
-import com.seadev.kampungsiagacovid.adapter.ProvinsiAdapter;
 import com.seadev.kampungsiagacovid.model.dataapi.DataHarian;
-import com.seadev.kampungsiagacovid.model.dataapi.DataProvinsi;
 import com.seadev.kampungsiagacovid.model.requestbody.ItemDataHarian;
-import com.seadev.kampungsiagacovid.model.requestbody.ItemDataProvinsi;
 import com.seadev.kampungsiagacovid.rest.ApiClientNasional;
 import com.seadev.kampungsiagacovid.rest.ApiInterfaceNasional;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.cardview.widget.CardView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -37,13 +45,38 @@ public class MainActivity extends AppCompatActivity {
     TextView tvRecover;
     @BindView(R.id.tv_died)
     TextView tvDied;
-    @BindView(R.id.rv_provinsi)
-    RecyclerView rvProvinsi;
-    private ProvinsiAdapter provinsiAdapter;
+    @BindView(R.id.tv_new_positive)
+    TextView tvNewConfirm;
+    @BindView(R.id.tv_new_in_care)
+    TextView tvNewInCare;
+    @BindView(R.id.tv_new_recover)
+    TextView tvNewRecover;
+    @BindView(R.id.tv_new_died)
+    TextView tvNewDied;
+    @BindView(R.id.btn_menu_data_covid)
+    CardView btnDataCovid;
+    @BindView(R.id.btn_menu_lapor_diri)
+    CardView btnLapor;
+    @BindView(R.id.btn_menu_hotline)
+    CardView btnHotline;
+    @BindView(R.id.btn_menu_pencegahan)
+    CardView btnPencegahan;
+    @BindView(R.id.pie_chart)
+    PieChart pieChart;
+    @BindView(R.id.txt_confirmed)
+    TextView tvPersenDirawat;
+    @BindView(R.id.txt_recovered)
+    TextView tvPersenSembuh;
+    @BindView(R.id.txt_deaths)
+    TextView tvPersenMeninggal;
+    @BindView(R.id.txt_cases)
+    TextView tvKasus;
+    @BindView(R.id.layout_cases)
+    LinearLayout layoutCase;
+
 
     private ApiInterfaceNasional apiServiceNasional = ApiClientNasional.getClientNasional().create(ApiInterfaceNasional.class);
     private List<DataHarian> dataHarianList;
-    private List<DataProvinsi> provinsiList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,15 +85,14 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         initFirebase();
         loadDataNasional();
-        initView();
-        loadDataProvinsi();
+        btnDataCovid.setOnClickListener(v ->
+                startActivity(new Intent(this, DataProvinsiActivity.class))
+        );
+        btnLapor.setOnClickListener(v ->
+                startActivity(new Intent(this, SurveyActivity.class))
+        );
     }
 
-    private void initView() {
-        provinsiAdapter = new ProvinsiAdapter(this);
-        rvProvinsi.setHasFixedSize(true);
-        rvProvinsi.setItemAnimator(new DefaultItemAnimator());
-    }
 
     private void initFirebase() {
         FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(task -> {
@@ -76,29 +108,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void loadDataProvinsi() {
-        provinsiList = new ArrayList<>();
-        Call<ItemDataProvinsi> call = apiServiceNasional.getDataProvinsi();
-        call.enqueue(new Callback<ItemDataProvinsi>() {
-            @Override
-            public void onResponse(Call<ItemDataProvinsi> call, Response<ItemDataProvinsi> response) {
-                assert response.body() != null;
-                provinsiList = response.body().getProvinsiList();
-                provinsiAdapter.setProvinsiList(provinsiList);
-                rvProvinsi.setAdapter(provinsiAdapter);
-            }
-
-            @Override
-            public void onFailure(Call<ItemDataProvinsi> call, Throwable t) {
-                Log.d("MainActivity", "error: " + t);
-            }
-        });
-    }
 
     private void loadDataNasional() {
         dataHarianList = new ArrayList<>();
         Call<ItemDataHarian> call = apiServiceNasional.getDataHarian();
         call.enqueue(new Callback<ItemDataHarian>() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onResponse(Call<ItemDataHarian> call, Response<ItemDataHarian> response) {
                 assert response.body() != null;
@@ -122,12 +137,53 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @SuppressLint("SetTextI18n")
     private void setDataHarian(DataHarian dataHarian) {
-        tvConfirm.setText("Total Kasus: " + dataHarian.getAttributes().getKasusTotal());
-        tvRecover.setText("Sembuh: " + dataHarian.getAttributes().getSembuh());
-        tvInCare.setText("Dalam Perawatan: " + dataHarian.getAttributes().getDalamPerawatan());
-        tvDied.setText("Meninggal: " + dataHarian.getAttributes().getMeninggal());
+        List<PieEntry> pieEntries = new ArrayList<>();
+        List<Integer> colors = new ArrayList<>();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            colors.add(getColor(R.color.colorAccent));
+            colors.add(getColor(android.R.color.holo_orange_light));
+            colors.add(getColor(android.R.color.holo_red_light));
+        }
+
+        pieEntries.add(new PieEntry((float) dataHarian.getAttributes().getSembuh(), "Sembuh"));
+        pieEntries.add(new PieEntry((float) dataHarian.getAttributes().getDalamPerawatan(), "Dirawat"));
+        pieEntries.add(new PieEntry((float) dataHarian.getAttributes().getMeninggal(), "Meninggal"));
+
+        PieDataSet pieDataSet = new PieDataSet(pieEntries, "");
+        pieDataSet.setColors(colors);
+        pieDataSet.setDrawValues(false);
+        PieData pieData = new PieData(pieDataSet);
+        pieChart.setData(pieData);
+        pieChart.setDescription(null);
+        pieChart.setHoleRadius(70f);
+        pieChart.setDrawEntryLabels(false);
+        pieChart.animateY(1500, Easing.EaseInOutQuart);
+        pieChart.invalidate();
+
+        tvConfirm.setText(String.valueOf(dataHarian.getAttributes().getKasusTotal()));
+        tvRecover.setText(String.valueOf(dataHarian.getAttributes().getSembuh()));
+        tvInCare.setText(String.valueOf(dataHarian.getAttributes().getDalamPerawatan()));
+        tvDied.setText(String.valueOf(dataHarian.getAttributes().getMeninggal()));
+
+        tvNewConfirm.setText("(+" + dataHarian.getAttributes().getKasusBaru() + ")");
+        tvNewRecover.setText("(+" + dataHarian.getAttributes().getSembuhBaru() + ")");
+        tvNewInCare.setText("(+" + dataHarian.getAttributes().getDirawatBaru() + ")");
+        tvNewDied.setText("(+" + dataHarian.getAttributes().getMeninggalBaru() + ")");
+
+        layoutCase.setVisibility(View.VISIBLE);
+        tvKasus.setText(String.valueOf(dataHarian.getAttributes().getKasusTotal()));
+
+        DecimalFormat format = new DecimalFormat("#.##");
+        format.setRoundingMode(RoundingMode.HALF_UP);
+        tvPersenSembuh.setText(format.format(dataHarian.getAttributes().getPersenSembuh()) + "%");
+        tvPersenMeninggal.setText(format.format(dataHarian.getAttributes().getPersenMeninggal()) + "%");
+        tvPersenDirawat.setText(format.format(dataHarian.getAttributes().getPersenPerawatan()) + "%");
+
+
     }
 
 }
