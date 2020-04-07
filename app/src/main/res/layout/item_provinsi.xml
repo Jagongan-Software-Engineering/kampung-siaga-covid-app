@@ -1,15 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tv_provinsi"
+    <androidx.cardview.widget.CardView
+        style="@style/ItemsTouchable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:text="Provinsi"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_margin="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tv_item_provinsi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="Provinsi"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:id="@+id/rlprov1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_item_provinsi">
+
+                <ImageView
+                    android:id="@+id/ivProvPositif"
+                    android:layout_width="20sp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_circle"
+                    android:tint="@android:color/holo_orange_light" />
+
+                <TextView
+                    android:id="@+id/tvTitleProvPositif"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_toEndOf="@id/ivProvPositif"
+                    android:text="Positif" />
+
+                <TextView
+                    android:id="@+id/tv_item_positif_prov"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvTitleProvPositif"
+                    android:layout_centerHorizontal="true"
+                    android:text="200"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlprov2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_item_provinsi"
+                android:layout_centerHorizontal="true">
+
+                <ImageView
+                    android:id="@+id/ivProvSembuh"
+                    android:layout_width="20sp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_circle"
+                    android:tint="@android:color/holo_green_light" />
+
+                <TextView
+                    android:id="@+id/tvTitleProvSembuh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_toEndOf="@id/ivProvSembuh"
+                    android:text="Sembuh" />
+
+                <TextView
+                    android:id="@+id/tv_item_sembuh_prov"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvTitleProvSembuh"
+                    android:layout_centerHorizontal="true"
+                    android:text="200"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlprov3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_item_provinsi"
+                android:layout_alignParentEnd="true">
+
+                <ImageView
+                    android:id="@+id/ivProvMeninggal"
+                    android:layout_width="20sp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_circle"
+                    android:tint="@android:color/holo_red_light" />
+
+                <TextView
+                    android:id="@+id/tvTitleProvMeninggal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_toEndOf="@id/ivProvMeninggal"
+                    android:text="Meninggal" />
+
+                <TextView
+                    android:id="@+id/tv_item_meni_prov"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvTitleProvMeninggal"
+                    android:layout_centerHorizontal="true"
+                    android:text="200"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
