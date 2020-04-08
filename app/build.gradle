@@ -75,5 +75,5 @@ dependencies {
     // Survey
     implementation "com.quickbirdstudios:surveykit:0.1.0"
     // Expandable Cardview
-    implementation 'com.alespero:expandable-cardview:0.8'
+    implementation 'com.github.florent37:expansionpanel:1.2.2'
 }

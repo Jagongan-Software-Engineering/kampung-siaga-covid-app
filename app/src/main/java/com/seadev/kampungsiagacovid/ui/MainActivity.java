@@ -91,6 +91,9 @@ public class MainActivity extends AppCompatActivity {
         btnLapor.setOnClickListener(v ->
                 startActivity(new Intent(this, SurveyActivity.class))
         );
+        btnHotline.setOnClickListener(v -> {
+            startActivity(new Intent(this, HotlineActivity.class));
+        });
     }
 
 

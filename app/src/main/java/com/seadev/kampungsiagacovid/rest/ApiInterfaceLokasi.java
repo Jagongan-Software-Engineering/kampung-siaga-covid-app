@@ -1,5 +1,6 @@
 package com.seadev.kampungsiagacovid.rest;
 
+import com.seadev.kampungsiagacovid.model.requestbody.ItemHotline;
 import com.seadev.kampungsiagacovid.model.requestbody.ItemIdDesa;
 import com.seadev.kampungsiagacovid.model.requestbody.ItemIdKecamatan;
 import com.seadev.kampungsiagacovid.model.requestbody.ItemIdKotaKab;
@@ -20,4 +21,7 @@ public interface ApiInterfaceLokasi {
 
     @GET("villages.json?alt=media&token=9ebc1e4a-3804-4031-bc50-c7dd7316a95c")
     Call<ItemIdDesa> getDataDesa();
+
+    @GET("hotline.json?alt=media&token=71649a27-7f75-4266-8575-1075e2bb9cdf")
+    Call<ItemHotline> getDataHotline();
 }
