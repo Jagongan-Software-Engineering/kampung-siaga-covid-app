@@ -1,12 +1,19 @@
 package com.seadev.kampungsiagacovid.ui;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.seadev.kampungsiagacovid.R;
 import com.seadev.kampungsiagacovid.model.dataapi.IdDesa;
 import com.seadev.kampungsiagacovid.model.dataapi.IdKecamatan;
@@ -31,15 +38,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
+    Button ton1;
+    private EditText text1, text2, text3, text4;
+    private DatabaseReference database;
+    private ProgressDialog loading;
 
-    @BindView(R.id.et_nama_lengkap)
-    EditText etNama;
-    @BindView(R.id.et_alamat)
-    EditText etAlamat;
-    @BindView(R.id.et_rt_rw)
-    EditText etRtRw;
-    @BindView(R.id.et_no_telp)
-    EditText etNoTelp;
     @BindView(R.id.sp_provinsi)
     AppCompatSpinner spProvinsi;
     @BindView(R.id.sp_kota_kab)
@@ -53,14 +56,59 @@ public class RegisterActivity extends AppCompatActivity {
     private List<IdKotaKab> kotaKabList;
     private List<IdKecamatan> kecamatanList;
     private List<IdDesa> desaList;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        database = FirebaseDatabase.getInstance().getReference();
         ButterKnife.bind(this);
         initView();
         loadDataProvinsi();
+
+        text1 = findViewById(R.id.et_nama_lengkap);
+        text2 = findViewById(R.id.et_alamat);
+        text3 = findViewById(R.id.et_rt_rw);
+        text4 = findViewById(R.id.et_no_telp);
+        ton1 = findViewById(R.id.btn_register);
+
+        ton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+
+                String Stext1 = text1.getText().toString();
+                String Stext2 =text2.getText().toString();
+                String Stext3 =text3.getText().toString();
+                String Stext4 =text4.getText().toString();
+
+                if (Stext1.equals("")) {
+                    text1.setError("Silahkan isi nama");
+                    text1.requestFocus();
+                } else if (Stext2.equals("")) {
+                    text2.setError("Silahkan isi alamat");
+                    text2.requestFocus();
+                } else if (Stext3.equals("")) {
+                    text3.setError("Silahkan isi RT/RW");
+                    text3.requestFocus();
+                } else if (Stext3.equals("")) {
+                    text4.setError("Silahkan isi no.hp");
+                    text4.requestFocus();
+                } else {
+                    loading = ProgressDialog.show(RegisterActivity.this,
+                            null,
+                            "please wait ....",
+                            true,
+                            false);
+
+                    submitUser(new Data(
+                            Stext1,
+                            Stext2,
+                            Stext3,
+                            Stext4));
+
+
+                }
+            }
+        });
     }
 
     private void initView() {
@@ -245,5 +293,29 @@ public class RegisterActivity extends AppCompatActivity {
         spDesa.setAdapter(adapter);
     }
 
+    private void submitUser(Data data) {
+        database.child("Register Warga")
+                .push()
+                .setValue(data)
+                .addOnSuccessListener(this, new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+
+                        loading.dismiss();
+
+                        text1.setText("");
+                        text2.setText("");
+                        text3.setText("");
+                        text4.setText("");
+
+
+
+
+                        Toast.makeText(RegisterActivity.this, "Data Berhasil Ditambahkan.",
+                                Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+    }
 
 }

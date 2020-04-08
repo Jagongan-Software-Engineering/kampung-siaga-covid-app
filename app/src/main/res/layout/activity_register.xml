@@ -79,6 +79,18 @@
         android:inputType="phone"
         app:layout_constraintTop_toBottomOf="@+id/et_rt_rw"
         tools:layout_editor_absoluteX="16dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:text="Register"
+        tools:ignore="MissingConstraints" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

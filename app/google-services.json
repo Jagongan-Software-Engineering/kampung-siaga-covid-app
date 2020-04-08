@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1099097656987-hegolun5lhek6m5afc2dukdng1n2bkgs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.seadev.kampungsiagacovid",
+            "certificate_hash": "dfb2dd5448c8fcfd1f884ea36d9a432604a8c607"
+          }
+        },
+        {
           "client_id": "1099097656987-mbd2rajbhqlqa3lggrbdrufthp03dktb.apps.googleusercontent.com",
           "client_type": 3
         }

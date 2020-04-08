@@ -1,8 +1,11 @@
 package com.seadev.kampungsiagacovid.ui;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.seadev.kampungsiagacovid.R;
@@ -26,7 +29,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @BindView(R.id.tv_confirmed)
     TextView tvConfirm;
@@ -43,11 +46,14 @@ public class MainActivity extends AppCompatActivity {
     private ApiInterfaceNasional apiServiceNasional = ApiClientNasional.getClientNasional().create(ApiInterfaceNasional.class);
     private List<DataHarian> dataHarianList;
     private List<DataProvinsi> provinsiList;
-
+    Button btnMove;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        btnMove = findViewById(R.id.Register);
+        btnMove.setOnClickListener(this);
         ButterKnife.bind(this);
         loadDataNasional();
         initView();
@@ -113,4 +119,15 @@ public class MainActivity extends AppCompatActivity {
         tvInCare.setText("Dalam Perawatan: " + dataHarian.getAttributes().getDalamPerawatan());
         tvDied.setText("Meninggal: " + dataHarian.getAttributes().getMeninggal());
     }
-}
+
+    @Override
+    public void onClick(View v) {
+
+                Intent moveActivity = new Intent(this, RegisterActivity.class);
+                startActivity(moveActivity);
+
+
+
+        }
+    }
+
