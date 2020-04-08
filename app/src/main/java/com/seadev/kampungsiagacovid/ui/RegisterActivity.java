@@ -8,10 +8,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.seadev.kampungsiagacovid.R;
@@ -56,6 +54,11 @@ public class RegisterActivity extends AppCompatActivity {
     private List<IdKotaKab> kotaKabList;
     private List<IdKecamatan> kecamatanList;
     private List<IdDesa> desaList;
+
+    private String lastIdProvinsi;
+    private String lastIdKotaKab;
+    private String lastIdKecamatan;
+    private String lastIdDesa;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -219,7 +222,8 @@ public class RegisterActivity extends AppCompatActivity {
         spProvinsi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                loadDataKotaKab(idProvinsis.get(position).getId());
+                lastIdProvinsi = idProvinsis.get(position).getId();
+                loadDataKotaKab(lastIdProvinsi);
             }
 
             @Override
@@ -244,7 +248,8 @@ public class RegisterActivity extends AppCompatActivity {
         spKotaKab.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                loadDataKecamatan(mId.get(position));
+                lastIdKotaKab = mId.get(position);
+                loadDataKecamatan(lastIdKotaKab);
             }
 
             @Override
@@ -269,7 +274,8 @@ public class RegisterActivity extends AppCompatActivity {
         spKecamatan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                loadDataDesa(mId.get(position));
+                lastIdKecamatan = mId.get(position);
+                loadDataDesa(lastIdKecamatan);
             }
 
             @Override
@@ -291,31 +297,43 @@ public class RegisterActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spDesa.setAdapter(adapter);
+        spDesa.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                lastIdDesa = mId.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void submitUser(Data data) {
+        Log.d("RegisterActivity", "\nnama: " + text1.getText() + "\n" +
+                "alamat: " + text2.getText() + "\n" +
+                "provinsi: " + lastIdProvinsi + "\n" +
+                "kota: " + lastIdKotaKab + "\n" +
+                "kecamatan: " + lastIdKecamatan + "\n" +
+                "desa: " + lastIdDesa + "\n" +
+                "rt/rw: " + text3.getText() + "\n" +
+                "no telp: " + text4.getText() + "\n");
+        loading.dismiss();
         database.child("Register Warga")
                 .push()
                 .setValue(data)
-                .addOnSuccessListener(this, new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-
-                        loading.dismiss();
-
-                        text1.setText("");
-                        text2.setText("");
-                        text3.setText("");
-                        text4.setText("");
-
-
-
-
-                        Toast.makeText(RegisterActivity.this, "Data Berhasil Ditambahkan.",
-                                Toast.LENGTH_SHORT).show();
-
-                    }
+                .addOnSuccessListener(this, aVoid -> {
+                    loading.dismiss();
+                    text1.setText("");
+                    text2.setText("");
+                    text3.setText("");
+                    text4.setText("");
+                    Toast.makeText(RegisterActivity.this, "Data Berhasil Ditambahkan.",
+                            Toast.LENGTH_SHORT).show();
                 });
+
+
     }
 
 }
