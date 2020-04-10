@@ -6,34 +6,48 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.seadev.kampungsiagacovid.BuildConfig;
 import com.seadev.kampungsiagacovid.R;
+import com.seadev.kampungsiagacovid.model.Asesmen;
 import com.seadev.kampungsiagacovid.model.dataapi.DataHarian;
 import com.seadev.kampungsiagacovid.model.requestbody.ItemDataHarian;
 import com.seadev.kampungsiagacovid.rest.ApiClientNasional;
 import com.seadev.kampungsiagacovid.rest.ApiInterfaceNasional;
+import com.seadev.kampungsiagacovid.room.AssesmenDatabase;
+import com.seadev.kampungsiagacovid.util.DateFormater;
+import com.seadev.kampungsiagacovid.util.ReportHistoryFormater;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.room.Room;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.seadev.kampungsiagacovid.room.AsesmenContract.db;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
     TextView tvNewRecover;
     @BindView(R.id.tv_new_died)
     TextView tvNewDied;
+
     @BindView(R.id.btn_menu_data_covid)
     CardView btnDataCovid;
     @BindView(R.id.btn_menu_lapor_diri)
@@ -61,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
     CardView btnHotline;
     @BindView(R.id.btn_menu_pencegahan)
     CardView btnPencegahan;
+
     @BindView(R.id.pie_chart)
     PieChart pieChart;
     @BindView(R.id.txt_confirmed)
@@ -74,17 +90,47 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.layout_cases)
     LinearLayout layoutCase;
 
+    @BindView(R.id.iv_ic_data_covid)
+    ImageView iconDataCovid;
+    @BindView(R.id.iv_ic_penilaian_diri)
+    ImageView iconPenilaianDiri;
+    @BindView(R.id.iv_ic_holtine)
+    ImageView iconHotline;
+    @BindView(R.id.iv_ic_pencegahan)
+    ImageView iconPencegahan;
+    @BindView(R.id.ivCampaign)
+    ImageView iconCampaign;
+    @BindView(R.id.iv_history_report)
+
+    ImageView imgReport;
+    @BindView(R.id.tv_title_report)
+    TextView tvTitleReport;
+    @BindView(R.id.tv_desc_report)
+    TextView tvDescReport;
+    @BindView(R.id.tv_date_report)
+    TextView tvDateReport;
+    @BindView(R.id.tv_more_report)
+    TextView btnMoreReport;
+
+    @BindView(R.id.cv_campaign)
+    CardView layoutCampaign;
+    @BindView(R.id.layout_history_report)
+    View layoutHistory;
+
 
     private ApiInterfaceNasional apiServiceNasional = ApiClientNasional.getClientNasional().create(ApiInterfaceNasional.class);
     private List<DataHarian> dataHarianList;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        initView();
         initFirebase();
         loadDataNasional();
+        fechDatabaseAsesmen();
         btnDataCovid.setOnClickListener(v ->
                 startActivity(new Intent(this, DataProvinsiActivity.class))
         );
@@ -94,6 +140,30 @@ public class MainActivity extends AppCompatActivity {
         btnHotline.setOnClickListener(v -> {
             startActivity(new Intent(this, HotlineActivity.class));
         });
+        btnPencegahan.setOnClickListener(v -> {
+            startActivity(new Intent(this, PreventionActivity.class));
+        });
+        layoutCampaign.setOnClickListener(v ->
+                startActivity(new Intent(this, SurveyActivity.class))
+        );
+    }
+
+    private void initView() {
+        Glide.with(this)
+                .load(BuildConfig.BASE_URL_LOKASI + getString(R.string.res_icon_data_covid))
+                .into(iconDataCovid);
+        Glide.with(this)
+                .load(BuildConfig.BASE_URL_LOKASI + getString(R.string.res_icon_assesment))
+                .into(iconPenilaianDiri);
+        Glide.with(this)
+                .load(BuildConfig.BASE_URL_LOKASI + getString(R.string.res_icon_hotline))
+                .into(iconHotline);
+        Glide.with(this)
+                .load(BuildConfig.BASE_URL_LOKASI + getString(R.string.res_icon_prevention))
+                .into(iconPencegahan);
+        Glide.with(this)
+                .load(BuildConfig.BASE_URL_LOKASI + getString(R.string.res_img_campaign))
+                .into(iconCampaign);
     }
 
 
@@ -147,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
         List<Integer> colors = new ArrayList<>();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            colors.add(getColor(R.color.colorAccent));
+            colors.add(getColor(android.R.color.holo_green_light));
             colors.add(getColor(android.R.color.holo_orange_light));
             colors.add(getColor(android.R.color.holo_red_light));
         }
@@ -185,8 +255,46 @@ public class MainActivity extends AppCompatActivity {
         tvPersenSembuh.setText(format.format(dataHarian.getAttributes().getPersenSembuh()) + "%");
         tvPersenMeninggal.setText(format.format(dataHarian.getAttributes().getPersenMeninggal()) + "%");
         tvPersenDirawat.setText(format.format(dataHarian.getAttributes().getPersenPerawatan()) + "%");
+    }
 
+    @SuppressLint({"SetTextI18n", "CheckResult"})
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void fechDatabaseAsesmen() {
+        db = Room.databaseBuilder(Objects.requireNonNull(this),
+                AssesmenDatabase.class, "db_asesmen").allowMainThreadQueries().build();
+        List<Asesmen> asesmenList = db.asesmenDao().getDataAsesmen();
+        if (!asesmenList.isEmpty()) {
 
+            Asesmen asesmen = asesmenList.get(asesmenList.size() - 1);
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                String nowDate = LocalDateTime.now().format(formatter);
+                LocalDate dateTime = LocalDate.parse(asesmen.getDate(), formatter);
+                String date = DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy").format(dateTime);
+                String[] listDate = date.split(" ");
+                int isToday = (nowDate.equals(asesmen.getDate())) ? 1 : 0;
+                tvDateReport.setText(DateFormater.Companion.getHari(listDate[0], isToday) + ", " + listDate[1] + " " + DateFormater.Companion.getBulan(listDate[2]) + " " + listDate[3]);
+            }
+            tvTitleReport.setText(ReportHistoryFormater.Companion.getTitleReport(asesmen.getRisiko()));
+            tvDescReport.setText(ReportHistoryFormater.Companion.getDescReport(asesmen.getRisiko()));
+            Glide.with(this)
+                    .load(ReportHistoryFormater.Companion.getImgReport(asesmen.getRisiko()))
+                    .into(imgReport);
+            imgReport.setBackgroundColor(getColor(ReportHistoryFormater.Companion.getImgReport(asesmen.getRisiko())));
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            String nowDate = LocalDateTime.now().format(formatter);
+
+            if (nowDate.equals(asesmen.getDate())) {
+                layoutCampaign.setVisibility(View.GONE);
+            } else {
+                layoutCampaign.setVisibility(View.VISIBLE);
+            }
+
+        } else {
+            layoutHistory.setVisibility(View.GONE);
+            Log.d("MainActivity", "room-size: " + asesmenList.size());
+        }
     }
 
 }
