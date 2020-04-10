@@ -18,7 +18,7 @@
             app:layout_constraintGuide_percent="0.5" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
+            android:id="@+id/cv_campaign"
             style="@style/ItemsTouchable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tvTitleCampaing"
                     android:layout_alignParentStart="true"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_toStartOf="@id/ivCampaign"
                     android:text="Ayo isi penilaan diri untuk mengetahi kondisi kamu sekarang" />
@@ -63,28 +63,40 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/ivCampaign"
+                    android:layout_below="@id/ivDescCampaign"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:background="@drawable/rounded_bg"
-                    android:paddingStart="8dp"
-                    android:paddingTop="4dp"
-                    android:paddingEnd="8dp"
-                    android:paddingBottom="4dp"
+                    android:paddingStart="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="8dp"
+                    android:textStyle="bold"
                     android:text="Milai Penilaian"
                     android:textColor="@color/white" />
 
                 <ImageView
+                    android:layout_width="100dp"
                     android:id="@+id/ivCampaign"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_height="100dp"
+                    android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_background" />
+                    android:scaleType="centerCrop" />
 
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
+
+
+        <include
+            android:id="@+id/layout_history_report"
+            layout="@layout/item_history_report"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_campaign" />
 
         <include
             android:id="@+id/layout_navigation"
@@ -96,7 +108,7 @@
             android:layout_marginBottom="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+            app:layout_constraintTop_toBottomOf="@+id/layout_history_report" />
 
         <include
             android:id="@+id/layout_overview"
@@ -130,7 +142,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/ic_circle"
-                    android:tint="@color/colorPrimary" />
+                    android:tint="@android:color/darker_gray" />
 
                 <TextView
                     android:id="@+id/tvTitlePositif"
@@ -184,7 +196,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/ic_circle"
-                    android:tint="@color/colorPrimary" />
+                    android:tint="@android:color/holo_green_light" />
 
                 <TextView
                     android:id="@+id/tvTitleRecover"
@@ -238,7 +250,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/ic_circle"
-                    android:tint="@color/colorPrimary" />
+                    android:tint="@android:color/holo_orange_light" />
 
                 <TextView
                     android:id="@+id/tvTitleInCare"
@@ -292,7 +304,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/ic_circle"
-                    android:tint="@color/colorPrimary" />
+                    android:tint="@android:color/holo_red_light" />
 
                 <TextView
                     android:id="@+id/tvTitleDied"

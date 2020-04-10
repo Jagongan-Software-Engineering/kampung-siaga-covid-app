@@ -36,7 +36,6 @@
             android:layout_width="0dp"
             android:layout_height="85dp"
             android:layout_margin="10dp"
-            app:cardBackgroundColor="@color/colorPrimary"
             app:cardCornerRadius="16dp"
             app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
@@ -44,10 +43,10 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/iv_ic_data_covid"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="4dp"
-                android:src="@drawable/ic_launcher_foreground" />
+                android:padding="16dp" />
 
         </androidx.cardview.widget.CardView>
 
@@ -66,7 +65,6 @@
             android:layout_width="0dp"
             android:layout_height="85dp"
             android:layout_margin="10dp"
-            app:cardBackgroundColor="@color/colorAccent"
             app:cardCornerRadius="16dp"
             app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toStartOf="@+id/guideline4"
@@ -74,10 +72,10 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/iv_ic_penilaian_diri"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="4dp"
-                android:src="@drawable/ic_launcher_foreground" />
+                android:padding="16dp" />
 
         </androidx.cardview.widget.CardView>
 
@@ -96,7 +94,6 @@
             android:layout_width="0dp"
             android:layout_height="85dp"
             android:layout_margin="10dp"
-            app:cardBackgroundColor="@android:color/holo_orange_light"
             app:cardCornerRadius="16dp"
             app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toStartOf="@+id/guideline5"
@@ -104,10 +101,10 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/iv_ic_holtine"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="4dp"
-                android:src="@drawable/ic_launcher_foreground" />
+                android:padding="16dp" />
 
         </androidx.cardview.widget.CardView>
 
@@ -126,7 +123,6 @@
             android:layout_width="0dp"
             android:layout_height="85dp"
             android:layout_margin="10dp"
-            app:cardBackgroundColor="@android:color/holo_red_light"
             app:cardCornerRadius="16dp"
             app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toEndOf="parent"
@@ -134,10 +130,10 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/iv_ic_pencegahan"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="4dp"
-                android:src="@drawable/ic_launcher_foreground" />
+                android:padding="16dp" />
 
         </androidx.cardview.widget.CardView>
 
