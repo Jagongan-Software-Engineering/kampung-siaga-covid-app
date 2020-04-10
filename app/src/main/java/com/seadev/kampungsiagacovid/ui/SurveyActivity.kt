@@ -1,12 +1,17 @@
 package com.seadev.kampungsiagacovid.ui
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.quickbirdstudios.surveykit.*
 import com.quickbirdstudios.surveykit.result.TaskResult
 import com.quickbirdstudios.surveykit.steps.CompletionStep
@@ -15,7 +20,12 @@ import com.quickbirdstudios.surveykit.steps.QuestionStep
 import com.quickbirdstudios.surveykit.steps.Step
 import com.quickbirdstudios.surveykit.survey.SurveyView
 import com.seadev.kampungsiagacovid.R
+import com.seadev.kampungsiagacovid.model.Asesmen
 import com.seadev.kampungsiagacovid.model.DataQuestionTitle
+import com.seadev.kampungsiagacovid.room.AsesmenContract.db
+import com.seadev.kampungsiagacovid.util.DateFormater
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class SurveyActivity : AppCompatActivity() {
 
@@ -23,16 +33,24 @@ class SurveyActivity : AppCompatActivity() {
     private lateinit var container: ViewGroup
     private lateinit var mStep: MutableList<Step>
     private lateinit var mAnswer: MutableList<Int>
+    private lateinit var database: DatabaseReference
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_survey)
         supportActionBar?.title = "Koesioner Penilaian Diri"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         survey = findViewById(R.id.survey_view)
+        survey.onCancelPendingInputEvents()
         container = findViewById(R.id.surveyContainer)
         initialQuestion()
         setupSurvey(survey)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -53,6 +71,7 @@ class SurveyActivity : AppCompatActivity() {
                             val ans = if (questionResult.stringIdentifier == "Ya") 1 else 0
                             mAnswer.add(ans)
                             Log.d("ASDF", "answer ${questionResult.stringIdentifier}")
+                            Log.d("ASDF", "answer ${questionResult.endDate}")
                         }
                     }
                     container.removeAllViews()
@@ -72,7 +91,7 @@ class SurveyActivity : AppCompatActivity() {
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         return if (keyCode == KeyEvent.KEYCODE_BACK) {
-            survey.backPressed()
+            finish()
             true
         } else false
     }
@@ -148,18 +167,69 @@ class SurveyActivity : AppCompatActivity() {
     }
 
     private fun validation() {
-        val dataValid = mutableListOf(1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1)
+        var datePath = ""
+        var idDesa = "3209181005"
+        var idUser = "MAJ0329sjdf123"
+        var mData = "("
         var counter = 0
+        var mRisiko = ""
+        var date = ""
+        var rtrw = "01/07"
+        val dataValid = mutableListOf(1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val current = LocalDateTime.now()
+            val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+            val formatter2 = DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy HH:mm")
+            datePath = current.format(formatter)
+            val formatted2 = current.format(formatter2)
+            val listDate = formatted2.split(" ")
+            date = "${DateFormater.getHari(listDate[0], 0)}, ${listDate[1]} ${DateFormater.getBulan(listDate[2])} ${listDate[3]}, ${listDate[4]}"
+
+        } else {
+            Log.d("QuestionAnswer", "error")
+        }
+
         mAnswer.forEachIndexed { index, i ->
             if (i == dataValid[index]) counter++
             Log.d("QuestionAnswer", "answer-$index: $i")
+            mData += if (index != mAnswer.size - 1) "$i, " else "$i)"
         }
-        Log.d("QuestionAnswer", "Counter: $counter")
         when (counter) {
-            in 0..7 -> Log.d("QuestionAnswer", "Risiko Rendah")
-            in 8..14 -> Log.d("QuestionAnswer", "Risiko Sedang")
-            in 15..21 -> Log.d("QuestionAnswer", "Risiko Tinggi")
+            in 0..7 -> {
+                mRisiko = "rendah"
+                Log.d("QuestionAnswer", "Risiko Rendah")
+            }
+            in 8..14 -> {
+                mRisiko = "sedang"
+                Log.d("QuestionAnswer", "Risiko Sedang")
+            }
+            in 15..21 -> {
+                mRisiko = "tinggi"
+                Log.d("QuestionAnswer", "Risiko Tinggi")
+            }
             else -> Log.d("QuestionAnswer", "Data not Valid")
         }
+
+        Log.d("QuestionAnswer", "DatePath: $datePath")
+        Log.d("QuestionAnswer", "IdDesa: $idDesa")
+        Log.d("QuestionAnswer", "IdUser: $idUser")
+        Log.d("QuestionAnswer", "DataSet: $mData")
+        Log.d("QuestionAnswer", "Counter: $counter")
+        Log.d("QuestionAnswer", "Risiko: $mRisiko")
+        Log.d("QuestionAnswer", "Date: $date")
+        Log.d("QuestionAnswer", "Rt/Rw: $rtrw")
+        val dataAsesmen = Asesmen(date, idUser, mData, counter, mRisiko, rtrw)
+        database = FirebaseDatabase.getInstance().reference
+        database.child("asesmen").child(idDesa).child(datePath).child(idUser)
+                .setValue(dataAsesmen).addOnSuccessListener {
+                    Toast.makeText(this, "Data berhasil di simpan", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Data gagal di simpan", Toast.LENGTH_SHORT).show()
+                }
+        dataAsesmen.date = datePath
+        db.asesmenDao().InsertDataAsesmen(dataAsesmen)
+        finish()
     }
 }
