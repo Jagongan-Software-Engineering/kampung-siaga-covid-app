@@ -13,7 +13,10 @@ import com.seadev.kampungsiagacovid.model.dataapi.TopikPencegahan
 import com.seadev.kampungsiagacovid.ui.PreventionStepActivity
 import kotlinx.android.synthetic.main.item_prevention.view.*
 
-class PreventionAdapter(val context: Context, val topikPencegahan: List<TopikPencegahan>) : RecyclerView.Adapter<PreventionAdapter.PreventionViewHolder>() {
+class PreventionAdapter(
+        val context: Context,
+        val topikPencegahan: List<TopikPencegahan>
+) : RecyclerView.Adapter<PreventionAdapter.PreventionViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PreventionViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_prevention, parent, false)

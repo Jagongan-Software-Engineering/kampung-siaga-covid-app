@@ -146,6 +146,9 @@ public class MainActivity extends AppCompatActivity {
         layoutCampaign.setOnClickListener(v ->
                 startActivity(new Intent(this, SurveyActivity.class))
         );
+        btnMoreReport.setOnClickListener(v ->
+                startActivity(new Intent(this, HistoryReportActivity.class))
+        );
     }
 
     private void initView() {
