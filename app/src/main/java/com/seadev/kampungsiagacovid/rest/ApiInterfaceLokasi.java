@@ -5,6 +5,7 @@ import com.seadev.kampungsiagacovid.model.requestbody.ItemIdDesa;
 import com.seadev.kampungsiagacovid.model.requestbody.ItemIdKecamatan;
 import com.seadev.kampungsiagacovid.model.requestbody.ItemIdKotaKab;
 import com.seadev.kampungsiagacovid.model.requestbody.ItemIdProvinsi;
+import com.seadev.kampungsiagacovid.model.requestbody.ItemTopikPencegahan;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -24,4 +25,7 @@ public interface ApiInterfaceLokasi {
 
     @GET("hotline.json?alt=media&token=71649a27-7f75-4266-8575-1075e2bb9cdf")
     Call<ItemHotline> getDataHotline();
+
+    @GET("topic.json?alt=media&token=c39d6fa8-fee9-4596-8b3f-66940c6b6110")
+    Call<ItemTopikPencegahan> getDataPencegahan();
 }
