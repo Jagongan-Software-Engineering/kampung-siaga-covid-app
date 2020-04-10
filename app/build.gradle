@@ -7,6 +7,10 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
 
+    androidExtensions {
+        experimental = true
+    }
+
     defaultConfig {
         applicationId "com.seadev.kampungsiagacovid"
         minSdkVersion 21
@@ -43,6 +47,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:19.1.1'
     implementation 'com.google.firebase:firebase-messaging:20.1.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.firebase:firebase-inappmessaging-display:19.0.4'
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -76,4 +81,11 @@ dependencies {
     implementation "com.quickbirdstudios:surveykit:0.1.0"
     // Expandable Cardview
     implementation 'com.github.florent37:expansionpanel:1.2.2'
+    // CardSlider
+    implementation 'com.github.IslamKhSh:CardSlider:1.0.1'
+    // room
+    def room_version = '2.2.3'
+    //noinspection GradleDependency
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
 }
