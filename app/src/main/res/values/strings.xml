@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Kampung Siaga Covid</string>
+    <string name="app_name">Aksi</string>
     <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
     <string name="finish_titile">Selesai</string>
     <string name="finish_text">Terima kasih telah mengisi survei harian</string>
@@ -47,5 +47,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_home">Home</string>
     <string name="title_asesmen">Asesmen</string>
+    <string name="res_icon_data_covid"><![CDATA[res%2F016-virus.png?alt=media&token=04d817bc-5e6d-4fe5-92b9-3008d55acdc7]]></string>
+    <string name="res_icon_assesment"><![CDATA[res%2F005-testing.png?alt=media&token=715dcdcc-b067-4d9a-b428-9661c681bbca]]></string>
+    <string name="res_icon_hotline"><![CDATA[res%2F01call.png?alt=media&token=e1c35ad6-05dd-4d74-b697-fc9b22abd802]]></string>
+    <string name="res_icon_prevention"><![CDATA[res%2F021-virus.png?alt=media&token=58458995-308e-480b-aa8c-ab546b90cc42]]></string>
+    <string name="res_img_campaign"><![CDATA[res%2F4587.jpg?alt=media&token=7000957a-f022-458f-9749-332e7a26dc04]]></string>
 
 </resources>
