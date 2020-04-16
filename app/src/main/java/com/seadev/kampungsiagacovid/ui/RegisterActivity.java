@@ -17,7 +17,7 @@ import com.seadev.kampungsiagacovid.model.requestbody.ItemIdKecamatan;
 import com.seadev.kampungsiagacovid.model.requestbody.ItemIdKotaKab;
 import com.seadev.kampungsiagacovid.model.requestbody.ItemIdProvinsi;
 import com.seadev.kampungsiagacovid.rest.ApiClientLokasi;
-import com.seadev.kampungsiagacovid.rest.ApiInterfaceLokasi;
+import com.seadev.kampungsiagacovid.rest.ApiInterfaceFirebase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
     AppCompatSpinner spKecamatan;
     @BindView(R.id.sp_desa)
     AppCompatSpinner spDesa;
-    private ApiInterfaceLokasi apiServiceLokasi = ApiClientLokasi.getClientLokasi().create(ApiInterfaceLokasi.class);
+    private ApiInterfaceFirebase apiServiceLokasi = ApiClientLokasi.getClientLokasi().create(ApiInterfaceFirebase.class);
     private List<IdProvinsi> provinsiList;
     private List<IdKotaKab> kotaKabList;
     private List<IdKecamatan> kecamatanList;
