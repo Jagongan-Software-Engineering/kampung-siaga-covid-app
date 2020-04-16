@@ -10,7 +10,7 @@ import com.seadev.kampungsiagacovid.model.requestbody.ItemTopikPencegahan;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
-public interface ApiInterfaceLokasi {
+public interface ApiInterfaceFirebase {
     @GET("provinces.json?alt=media&token=4c5d0741-8042-494b-8a6e-e14bc3260330")
     Call<ItemIdProvinsi> getDataProvinsi();
 
@@ -23,9 +23,9 @@ public interface ApiInterfaceLokasi {
     @GET("villages.json?alt=media&token=9ebc1e4a-3804-4031-bc50-c7dd7316a95c")
     Call<ItemIdDesa> getDataDesa();
 
-    @GET("hotline.json?alt=media&token=71649a27-7f75-4266-8575-1075e2bb9cdf")
+    @GET("hotline.json?alt=media&token=5b30aaeb-74a8-46be-b055-2f382792b89c")
     Call<ItemHotline> getDataHotline();
 
-    @GET("topic.json?alt=media&token=c39d6fa8-fee9-4596-8b3f-66940c6b6110")
+    @GET("topic.json?alt=media&token=01129e3d-2ec1-4a25-aa33-e3f14fe0836f")
     Call<ItemTopikPencegahan> getDataPencegahan();
 }
