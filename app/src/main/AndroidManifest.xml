@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.DetailReportActivity" />
         <activity android:name=".ui.HistoryReportActivity" />
         <activity android:name=".ui.PreventionStepActivity" />
         <activity android:name=".ui.PreventionActivity" />
