@@ -2,6 +2,7 @@ package com.seadev.kampungsiagacovid.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.seadev.kampungsiagacovid.R
 import com.seadev.kampungsiagacovid.model.Asesmen
+import com.seadev.kampungsiagacovid.ui.DetailReportActivity
+import com.seadev.kampungsiagacovid.ui.DetailReportActivity.Companion.DATA_DETAIL_EXTRA
 import com.seadev.kampungsiagacovid.util.DateFormater
+import com.seadev.kampungsiagacovid.util.ReportHistoryFormater.Companion.getColorReport
 import com.seadev.kampungsiagacovid.util.ReportHistoryFormater.Companion.getDescReport
 import com.seadev.kampungsiagacovid.util.ReportHistoryFormater.Companion.getImgReport
 import com.seadev.kampungsiagacovid.util.ReportHistoryFormater.Companion.getTitleReport
@@ -55,8 +59,12 @@ class HistoryReportAdapter(
             Glide.with(context)
                     .load(getImgReport(asesmen.risiko!!))
                     .into(itemView.iv_history_report)
-            itemView.iv_history_report.setBackgroundColor(context.getColor(getImgReport(asesmen.risiko!!)))
-
+            itemView.iv_history_report.setBackgroundColor(context.getColor(getColorReport(asesmen.risiko!!)))
+            itemView.cv_content_asesment.setOnClickListener {
+                val intent = Intent(context, DetailReportActivity::class.java)
+                intent.putExtra(DATA_DETAIL_EXTRA, getTitleReport(asesmen.risiko!!).toLowerCase() + " home")
+                context.startActivity(intent)
+            }
         }
     }
 }
