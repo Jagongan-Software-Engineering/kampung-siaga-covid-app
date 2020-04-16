@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:text="Provinsi"
+                android:textColor="@color/color_text_1"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -48,7 +49,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@id/ivProvPositif"
-                    android:text="Positif" />
+                    android:text="Positif"
+                    android:textColor="@color/color_text_2" />
 
                 <TextView
                     android:id="@+id/tv_item_positif_prov"
@@ -57,6 +59,7 @@
                     android:layout_below="@id/tvTitleProvPositif"
                     android:layout_centerHorizontal="true"
                     android:text="200"
+                    android:textColor="@color/color_text_1"
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </RelativeLayout>
@@ -81,7 +84,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@id/ivProvSembuh"
-                    android:text="Sembuh" />
+                    android:text="Sembuh"
+                    android:textColor="@color/color_text_2" />
 
                 <TextView
                     android:id="@+id/tv_item_sembuh_prov"
@@ -90,6 +94,7 @@
                     android:layout_below="@id/tvTitleProvSembuh"
                     android:layout_centerHorizontal="true"
                     android:text="200"
+                    android:textColor="@color/color_text_1"
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </RelativeLayout>
@@ -114,7 +119,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@id/ivProvMeninggal"
-                    android:text="Meninggal" />
+                    android:text="Meninggal"
+                    android:textColor="@color/color_text_2" />
 
                 <TextView
                     android:id="@+id/tv_item_meni_prov"
@@ -123,6 +129,7 @@
                     android:layout_below="@id/tvTitleProvMeninggal"
                     android:layout_centerHorizontal="true"
                     android:text="200"
+                    android:textColor="@color/color_text_1"
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </RelativeLayout>

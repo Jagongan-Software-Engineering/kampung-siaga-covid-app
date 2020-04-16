@@ -34,22 +34,25 @@
                 android:id="@+id/tvTitleStepPrevention"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="20dp"
+                android:padding="16dp"
+                android:textColor="@color/color_text_1"
                 android:text="Ini Judul"
-                android:textSize="28sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="@+id/guideline" />
 
             <TextView
                 android:id="@+id/tvDescStepPrevention"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:ellipsize="end"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
                 android:paddingBottom="16dp"
                 android:text="Ini adalah tex yang panjang Ini adalah tex yang panjang Ini adalah tex yang panjang Ini adalah tex yang panjang Ini adalah tex yang panjang Ini adalah tex yang panjang Ini adalah tex yang panjang Ini adalah tex yang panjang Ini adalah tex yang panjang Ini adalah tex yang panjang Ini adalah tex yang panjang Ini adalah tex yang panjang Ini adalah tex yang panjang "
-                android:textSize="20sp"
+                android:textColor="@color/color_text_2"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvTitleStepPrevention" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
