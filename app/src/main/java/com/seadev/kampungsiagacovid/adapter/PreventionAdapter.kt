@@ -15,8 +15,15 @@ import kotlinx.android.synthetic.main.item_prevention.view.*
 
 class PreventionAdapter(
         val context: Context,
-        val topikPencegahan: List<TopikPencegahan>
+        val topikPencegahan: MutableList<TopikPencegahan>
 ) : RecyclerView.Adapter<PreventionAdapter.PreventionViewHolder>() {
+
+    fun clear() {
+        val size: Int = topikPencegahan.size
+        topikPencegahan.clear()
+        notifyItemRangeRemoved(0, size)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PreventionViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_prevention, parent, false)
