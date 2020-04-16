@@ -5,16 +5,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.github.florent37.expansionpanel.ExpansionLayout;
 import com.github.florent37.expansionpanel.viewgroup.ExpansionLayoutCollection;
+import com.seadev.kampungsiagacovid.BuildConfig;
 import com.seadev.kampungsiagacovid.R;
 import com.seadev.kampungsiagacovid.model.dataapi.Hotline;
 import com.seadev.kampungsiagacovid.model.dataapi.IdProvinsi;
 import com.seadev.kampungsiagacovid.model.requestbody.ItemHotline;
 import com.seadev.kampungsiagacovid.rest.ApiClientLokasi;
-import com.seadev.kampungsiagacovid.rest.ApiInterfaceLokasi;
+import com.seadev.kampungsiagacovid.rest.ApiInterfaceFirebase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +72,9 @@ public class HotlineProvinsiAdapter extends RecyclerView.Adapter<HotlineProvinsi
     public void onBindViewHolder(@NonNull HotlineViewHolder holder, int position) {
         IdProvinsi dataProvinsi = provinsiList.get(position);
         holder.title.setText(dataProvinsi.getName());
+        Glide.with(context)
+                .load(BuildConfig.BASE_URL_LOKASI + context.getString(R.string.res_icon_hotline))
+                .into(holder.iconCall);
         expansionsCollection.add(holder.getExpansionLayout());
         expansionsCollection.openOnlyOne(true);
         holder.initView();
@@ -84,11 +90,13 @@ public class HotlineProvinsiAdapter extends RecyclerView.Adapter<HotlineProvinsi
     public class HotlineViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.expansionLayout)
         ExpansionLayout expansionLayout;
+        @BindView(R.id.iv_call)
+        ImageView iconCall;
         @BindView(R.id.tv_title_hotline)
         TextView title;
         @BindView(R.id.rv_rs)
         RecyclerView rvRs;
-        private ApiInterfaceLokasi apiServiceLokasi = ApiClientLokasi.getClientLokasi().create(ApiInterfaceLokasi.class);
+        private ApiInterfaceFirebase apiServiceLokasi = ApiClientLokasi.getClientLokasi().create(ApiInterfaceFirebase.class);
         private List<Hotline> hotlineList;
         private HotlineRsAdapter rsAdapter;
 
@@ -115,7 +123,8 @@ public class HotlineProvinsiAdapter extends RecyclerView.Adapter<HotlineProvinsi
                 @Override
                 public void onResponse(Call<ItemHotline> call, Response<ItemHotline> response) {
                     assert response.body() != null;
-                    hotlineList = response.body().getHotlineList();
+                    hotlineList.add(new Hotline("Layanan Nasional Covid-19", "119", "1"));
+                    hotlineList.addAll(response.body().getHotlineList());
                     for (Hotline hotline : hotlineList) {
                         if (hotline.getIdProvinsi().equals(idProvinsi)) {
                             rsAdapter.addHotline(hotline);
