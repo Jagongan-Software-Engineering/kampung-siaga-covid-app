@@ -1,15 +1,20 @@
 package com.seadev.kampungsiagacovid.ui
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import android.view.MenuItem
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.room.Room
+import com.bumptech.glide.Glide
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.quickbirdstudios.surveykit.*
@@ -19,13 +24,18 @@ import com.quickbirdstudios.surveykit.steps.InstructionStep
 import com.quickbirdstudios.surveykit.steps.QuestionStep
 import com.quickbirdstudios.surveykit.steps.Step
 import com.quickbirdstudios.surveykit.survey.SurveyView
+import com.seadev.kampungsiagacovid.BuildConfig
 import com.seadev.kampungsiagacovid.R
 import com.seadev.kampungsiagacovid.model.Asesmen
 import com.seadev.kampungsiagacovid.model.DataQuestionTitle
 import com.seadev.kampungsiagacovid.room.AsesmenContract.db
+import com.seadev.kampungsiagacovid.room.AssesmenDatabase
 import com.seadev.kampungsiagacovid.util.DateFormater
+import com.seadev.kampungsiagacovid.util.ReportHistoryFormater
+import kotlinx.android.synthetic.main.activity_survey.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 class SurveyActivity : AppCompatActivity() {
 
@@ -40,22 +50,87 @@ class SurveyActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_survey)
         supportActionBar?.title = "Koesioner Penilaian Diri"
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        survey = findViewById(R.id.survey_view)
-        survey.onCancelPendingInputEvents()
-        container = findViewById(R.id.surveyContainer)
-        initialQuestion()
-        setupSurvey(survey)
+//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        initView()
+    }
+
+    private fun initView() {
+        db = Room.databaseBuilder(Objects.requireNonNull(this),
+                AssesmenDatabase::class.java, "db_asesmen").allowMainThreadQueries().build()
+        val asesmenList = db.asesmenDao().dataAsesmen
+        if (!asesmenList.isEmpty()) {
+            val (date1) = asesmenList[asesmenList.size - 1]
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+                val nowDate = LocalDateTime.now().format(formatter)
+                val isToday = if (nowDate == date1) 1 else 0
+                if (isToday == 1) {
+                    layoutScroll.visibility = View.VISIBLE
+                    layoutDoneSurvey.visibility = View.VISIBLE
+                    layoutGuideSurvey.visibility = View.GONE
+                    btnSurveyBack.setOnClickListener { finish() }
+                    Glide.with(this)
+                            .load(BuildConfig.BASE_URL_LOKASI + getString(R.string.res_icon_assesment))
+                            .into(ivImgDoneSurvey)
+                } else {
+                    Glide.with(this)
+                            .load(BuildConfig.BASE_URL_LOKASI + "res%2F068-settings.png?alt=media&token=700c2e17-e8d0-4ef5-b9a6-9a8804e1e294")
+                            .into(ivImgGuideSurvey)
+                    btnGuideOK.setOnClickListener {
+                        layoutScroll.visibility = View.GONE
+                        layoutDoneSurvey.visibility = View.GONE
+                        layoutGuideSurvey.visibility = View.GONE
+                        survey_view.visibility = View.VISIBLE
+                        survey = findViewById(R.id.survey_view)
+                        survey.onCancelPendingInputEvents()
+                        container = findViewById(R.id.surveyContainer)
+                        initialQuestion()
+                        setupSurvey(survey)
+
+                    }
+
+                }
+            }
+        } else {
+            Glide.with(this)
+                    .load(BuildConfig.BASE_URL_LOKASI + "res%2F068-settings.png?alt=media&token=700c2e17-e8d0-4ef5-b9a6-9a8804e1e294")
+                    .into(ivImgGuideSurvey)
+            btnGuideOK.setOnClickListener {
+                layoutScroll.visibility = View.GONE
+                layoutDoneSurvey.visibility = View.GONE
+                layoutGuideSurvey.visibility = View.GONE
+                survey_view.visibility = View.VISIBLE
+                survey = findViewById(R.id.survey_view)
+                survey.onCancelPendingInputEvents()
+                container = findViewById(R.id.surveyContainer)
+                initialQuestion()
+                setupSurvey(survey)
+
+            }
+        }
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        finish()
+        onBack()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) finish()
+        if (item.itemId == android.R.id.home) onBack()
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun onBack() {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("Jika Anda keluar, data yang Anda isi akan di abaikan.")
+                .setPositiveButton("Ya") { dialog, which ->
+                    survey.onSurveyFinish
+                    survey.removeAllViews()
+                    container.removeAllViews()
+                    finish()
+                }
+                .setNegativeButton("Batal") { dialog, which -> }
+        builder.setTitle("Apakah Anda yakin ingin keluar dari penilaian diri sekarang?")
+        builder.create().show()
     }
 
     private fun setupSurvey(surveyView: SurveyView) {
@@ -122,7 +197,7 @@ class SurveyActivity : AppCompatActivity() {
         }
 
         mStep.add(InstructionStep(
-                title = R.string.intro_title,
+                title = R.string.intro_title_2,
                 text = R.string.intro_text_2,
                 buttonText = R.string.intro_start))
 
@@ -141,7 +216,7 @@ class SurveyActivity : AppCompatActivity() {
         }
 
         mStep.add(InstructionStep(
-                title = R.string.intro_title,
+                title = R.string.intro_title_3,
                 text = R.string.intro_text_3,
                 buttonText = R.string.intro_start))
 
@@ -230,6 +305,10 @@ class SurveyActivity : AppCompatActivity() {
                 }
         dataAsesmen.date = datePath
         db.asesmenDao().InsertDataAsesmen(dataAsesmen)
+        val intent = Intent(this, DetailReportActivity::class.java)
+        intent.putExtra(DetailReportActivity.DATA_DETAIL_EXTRA, ReportHistoryFormater
+                .getTitleReport(dataAsesmen.risiko!!).toLowerCase() + " result")
+        startActivity(intent)
         finish()
     }
 }
