@@ -3,7 +3,11 @@ package com.seadev.kampungsiagacovid.ui;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.seadev.kampungsiagacovid.R;
 import com.seadev.kampungsiagacovid.adapter.ProvinsiAdapter;
 import com.seadev.kampungsiagacovid.model.dataapi.DataProvinsi;
@@ -19,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -31,6 +36,10 @@ public class DataProvinsiActivity extends AppCompatActivity {
     SearchView searchView;
     @BindView(R.id.rv_provinsi)
     RecyclerView rvMain;
+    @BindView(R.id.pb_data_provinsi)
+    ProgressBar progressBar;
+    @BindView(R.id.refreshLayoutDataProvinsi)
+    SwipeRefreshLayout refreshLayout;
     private List<DataProvinsi> provinsiList;
     private ProvinsiAdapter provinsiAdapter;
     private ApiInterfaceNasional apiServiceNasional = ApiClientNasional.getClientNasional().create(ApiInterfaceNasional.class);
@@ -45,8 +54,20 @@ public class DataProvinsiActivity extends AppCompatActivity {
             getSupportActionBar().setElevation(0);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        Sprite sprite = new ThreeBounce();
+        sprite.setColor(getResources().getColor(R.color.colorPrimary));
+        progressBar.setIndeterminateDrawable(sprite);
+
         initView();
         loadDataProvinsi();
+
+        refreshLayout.setOnRefreshListener(() -> {
+            provinsiAdapter.clear();
+            initView();
+            loadDataProvinsi();
+            refreshLayout.setRefreshing(false);
+        });
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -77,6 +98,7 @@ public class DataProvinsiActivity extends AppCompatActivity {
     }
 
     private void loadDataProvinsi() {
+        showProgressbar(true);
         provinsiList = new ArrayList<>();
         Call<ItemDataProvinsi> call = apiServiceNasional.getDataProvinsi();
         call.enqueue(new Callback<ItemDataProvinsi>() {
@@ -86,6 +108,7 @@ public class DataProvinsiActivity extends AppCompatActivity {
                 provinsiList = response.body().getProvinsiList();
                 provinsiAdapter.setProvinsiList(provinsiList);
                 rvMain.setAdapter(provinsiAdapter);
+                showProgressbar(false);
             }
 
             @Override
@@ -96,6 +119,7 @@ public class DataProvinsiActivity extends AppCompatActivity {
     }
 
     private void searchData(String query) {
+        showProgressbar(true);
         provinsiList = new ArrayList<>();
         Call<ItemDataProvinsi> call = apiServiceNasional.getDataProvinsi();
         call.enqueue(new Callback<ItemDataProvinsi>() {
@@ -114,6 +138,7 @@ public class DataProvinsiActivity extends AppCompatActivity {
                         }
                     }
                 }
+                showProgressbar(false);
                 rvMain.setAdapter(provinsiAdapter);
 
             }
@@ -129,5 +154,13 @@ public class DataProvinsiActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) finish();
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showProgressbar(boolean state) {
+        if (state) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
     }
 }
