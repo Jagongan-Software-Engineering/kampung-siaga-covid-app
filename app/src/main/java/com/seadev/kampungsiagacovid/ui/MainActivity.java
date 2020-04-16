@@ -41,6 +41,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.room.Room;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -114,8 +115,16 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.cv_campaign)
     CardView layoutCampaign;
+    @BindView(R.id.cv_content_asesment)
+    CardView contentAsesmen;
     @BindView(R.id.layout_history_report)
     View layoutHistory;
+
+    @BindView(R.id.iv_icon_user)
+    ImageView iconUser;
+
+    @BindView(R.id.swipe_refresh_main)
+    SwipeRefreshLayout refreshLayout;
 
 
     private ApiInterfaceNasional apiServiceNasional = ApiClientNasional.getClientNasional().create(ApiInterfaceNasional.class);
@@ -127,10 +136,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
         initView();
         initFirebase();
         loadDataNasional();
         fechDatabaseAsesmen();
+
+        refreshLayout.setOnRefreshListener(() -> {
+            initView();
+            initFirebase();
+            loadDataNasional();
+            fechDatabaseAsesmen();
+            refreshLayout.setRefreshing(false);
+        });
+
         btnDataCovid.setOnClickListener(v ->
                 startActivity(new Intent(this, DataProvinsiActivity.class))
         );
@@ -149,6 +168,11 @@ public class MainActivity extends AppCompatActivity {
         btnMoreReport.setOnClickListener(v ->
                 startActivity(new Intent(this, HistoryReportActivity.class))
         );
+        contentAsesmen.setOnClickListener(v -> {
+            Intent intent = new Intent(this, DetailReportActivity.class);
+            intent.putExtra(DetailReportActivity.Companion.getDATA_DETAIL_EXTRA(), tvTitleReport.getText().toString().toLowerCase() + " home");
+            startActivity(intent);
+        });
     }
 
     private void initView() {
@@ -167,6 +191,9 @@ public class MainActivity extends AppCompatActivity {
         Glide.with(this)
                 .load(BuildConfig.BASE_URL_LOKASI + getString(R.string.res_img_campaign))
                 .into(iconCampaign);
+        Glide.with(this)
+                .load("https://avatars1.githubusercontent.com/u/32610660?s=460&u=9a72e192859faf4ed12e8d226e9faad4bcd87bd5&v=4")
+                .into(iconUser);
     }
 
 
@@ -267,7 +294,7 @@ public class MainActivity extends AppCompatActivity {
                 AssesmenDatabase.class, "db_asesmen").allowMainThreadQueries().build();
         List<Asesmen> asesmenList = db.asesmenDao().getDataAsesmen();
         if (!asesmenList.isEmpty()) {
-
+            layoutHistory.setVisibility(View.VISIBLE);
             Asesmen asesmen = asesmenList.get(asesmenList.size() - 1);
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -283,7 +310,7 @@ public class MainActivity extends AppCompatActivity {
             Glide.with(this)
                     .load(ReportHistoryFormater.Companion.getImgReport(asesmen.getRisiko()))
                     .into(imgReport);
-            imgReport.setBackgroundColor(getColor(ReportHistoryFormater.Companion.getImgReport(asesmen.getRisiko())));
+            imgReport.setBackgroundColor(getColor(ReportHistoryFormater.Companion.getColorReport(asesmen.getRisiko())));
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             String nowDate = LocalDateTime.now().format(formatter);
