@@ -7,4 +7,5 @@
     <color name="color_text_1">#000000</color>
     <color name="color_text_2">#373737</color>
     <color name="color_text_3">#818181</color>
+    <color name="skeleton">#B4B4B4</color>
 </resources>

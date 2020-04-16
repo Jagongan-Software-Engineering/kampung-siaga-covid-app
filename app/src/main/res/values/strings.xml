@@ -3,47 +3,48 @@
     <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
     <string name="finish_titile">Selesai</string>
     <string name="finish_text">Terima kasih telah mengisi survei harian</string>
-    <string name="finish_btn">Akhiri</string>
+    <string name="finish_btn">Lihat Hasil</string>
     <string name="boolean_example_title">Apakah Anda pergi keluar rumah? </string>
     <string name="boolean_example_text"> </string>
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
-    <string name="intro_title">Kuesioner Risiko Pribadi</string>
+    <string name="intro_title">Langkah 1</string>
+    <string name="intro_title_2">Langkah 2</string>
+    <string name="intro_title_3">Langkah 3</string>
     <string name="intro_start">Selanjutnya</string>
 
-    <string name="intro_text">Potensi Tertular di luar Rumah</string>
-    <string name="intro_text_2">Potensi Tertular di dalam Rumah</string>
-    <string name="intro_text_3">Daya Tahan Tubuh</string>
+    <string name="intro_text">Kuesioner potensi tertular di luar Rumah</string>
+    <string name="intro_text_2">Kuesioner potensi tertular di dalam Rumah</string>
+    <string name="intro_text_3">Kuesioner daya tahan tubuh</string>
 
     <!-- Y resiko -->
     <string name="question_title_1">Apakah Anda pergi keluar rumah hari ini?</string>
     <string name="question_title_2">Apakah Anda menggunakan transportasi umum seperti transportasi online, angkot, bus, taksi, kereta api?</string>
     <string name="question_title_3">Apakah Anda memakai masker pada saat berkumpul dengan orang lain?</string>
     <string name="question_title_4">Apakah Anda berjabat tangan dengan orang lain?</string>y
-    <string name="question_title_5">Apakah Anda membersihkan tangan dengan hand sanitizer/tissue basah sebelum pegang kemudi mobil/motor?</string>
+    <string name="question_title_5">Apakah Anda membersihkan tangan dengan hand sanitizer / tissue basah sebelum pegang kemudi mobil/motor?</string>
     <string name="question_title_6">Apakah Anda menyentuh benda/uang yang juga disentuh orang lain?</string>
-    <string name="question_title_7">Apakah Anda menjaga jarak 1,5 meter dengan orang lain ketika : belanja, bekerja, belajar, ibadah?</string>
+    <string name="question_title_7">Apakah Anda menjaga jarak 1,5 meter dengan orang lain ketika belanja, bekerja, belajar, ibadah?</string>
     <string name="question_title_8">Apakah Anda makan di luar rumah (warung/restauran)?</string>
-    <string name="question_title_9">Apakah Anda minum minuman hangat dan cuci tangan dengan sabun setelah tiba di tujuan?</string>
+    <string name="question_title_9">Apakah Anda mebersihkan tangan dengan hand sanitizer,tissue basah atau sabun setelah tiba di tujuan?</string>
     <string name="question_title_10">Apakah Anda berada di wilayah kelurahan tempat pasien tertular?</string>
 
 
     <string name="question_title_11">Apakah Anda pasang hand sanitizer di depan pintu masuk, untuk bersihkan tangan sebelum pegang gagang (handle) pintu masuk rumah?</string>
     <string name="question_title_12">Apakah Anda mencuci tangan dengan sabun setelah tiba di rumah?</string>
-    <string name="question_title_13">Apakah Anda menyediakan : tissue basah/antiseptic, masker, sabun antiseptic bagi keluarga di rumah?</string>
+    <string name="question_title_13">Apakah Anda menyediakan tissue basah / antiseptic, masker, sabun antiseptic bagi keluarga di rumah?</string>
     <string name="question_title_14">Apakah Anda segera merendam baju dan celana bekas pakai di luar rumah ke dalam air panas/sabun?</string>
     <string name="question_title_15">Apakah Anda segera mandi keramas setelah Anda tiba di rumah?</string>
     <string name="question_title_16">Apakah Anda mensosialisasikan check list penilaian resiko pribadi ini kepada keluarga di rumah?</string>
 
     <string name="question_title_17">Apakah Anda dalam sehari terkena cahaya matahari minimal 15 menit?</string>
-    <string name="question_title_18">Apakah Anda jalan kaki/berolahraga minimal 30 menit setiap hari?</string>
+    <string name="question_title_18">Apakah Anda jalan kaki / berolahraga minimal 30 menit setiap hari?</string>
     <string name="question_title_19">Apakah Anda minum vitamin C dan E, dan cukup tidur?</string>
     <string name="question_title_20">Apakah Anda berusia di atas 60 tahun?</string>
-    <string name="question_title_21">Apakah Anda mempunyai penyakit: jantung/diabetes/gangguan pernafasan kronik?</string>
+    <string name="question_title_21">Apakah Anda mempunyai penyakit jantung / diabetes / gangguan pernafasan kronik?</string>
     <string name="default_notification_channel_id">Reminder</string>
     <string name="default_notification_channel_name">Reminder Notification</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_home">Home</string>
     <string name="title_asesmen">Asesmen</string>
@@ -52,5 +53,10 @@
     <string name="res_icon_hotline"><![CDATA[res%2F01call.png?alt=media&token=e1c35ad6-05dd-4d74-b697-fc9b22abd802]]></string>
     <string name="res_icon_prevention"><![CDATA[res%2F021-virus.png?alt=media&token=58458995-308e-480b-aa8c-ab546b90cc42]]></string>
     <string name="res_img_campaign"><![CDATA[res%2F4587.jpg?alt=media&token=7000957a-f022-458f-9749-332e7a26dc04]]></string>
+    <string name="cari_provinsi">Cari Provinsi</string>
+    <string name="daftar_hotline">Daftar Hotline</string>
+    <string name="hubungi_119">Hubungi 119</string>
+    <string name="selesai">Selesai</string>
+    <string name="app_sub_name">Aplikasi Kampung Siaga</string>
 
 </resources>
