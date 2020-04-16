@@ -3,13 +3,17 @@ package com.seadev.kampungsiagacovid.ui;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.seadev.kampungsiagacovid.R;
 import com.seadev.kampungsiagacovid.adapter.HotlineProvinsiAdapter;
 import com.seadev.kampungsiagacovid.model.dataapi.IdProvinsi;
 import com.seadev.kampungsiagacovid.model.requestbody.ItemIdProvinsi;
 import com.seadev.kampungsiagacovid.rest.ApiClientLokasi;
-import com.seadev.kampungsiagacovid.rest.ApiInterfaceLokasi;
+import com.seadev.kampungsiagacovid.rest.ApiInterfaceFirebase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -31,8 +36,12 @@ public class HotlineActivity extends AppCompatActivity {
     RecyclerView rvMain;
     @BindView(R.id.sv_hotline)
     SearchView searchView;
+    @BindView(R.id.pb_data_hotline)
+    ProgressBar progressBar;
+    @BindView(R.id.refreshLayoutHotline)
+    SwipeRefreshLayout refreshLayout;
     private HotlineProvinsiAdapter adapter;
-    private ApiInterfaceLokasi apiServiceLokasi = ApiClientLokasi.getClientLokasi().create(ApiInterfaceLokasi.class);
+    private ApiInterfaceFirebase apiServiceLokasi = ApiClientLokasi.getClientLokasi().create(ApiInterfaceFirebase.class);
     private List<IdProvinsi> provinsiList;
 
     @Override
@@ -43,8 +52,21 @@ public class HotlineActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Hotline Covid-19 Indonesia");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setElevation(0);
+
+        Sprite sprite = new ThreeBounce();
+        sprite.setColor(getResources().getColor(R.color.colorPrimary));
+        progressBar.setIndeterminateDrawable(sprite);
+
         initView();
         loadDataProvinsi();
+
+        refreshLayout.setOnRefreshListener(() -> {
+            adapter.clear();
+            initView();
+            loadDataProvinsi();
+            refreshLayout.setRefreshing(false);
+        });
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -56,15 +78,16 @@ public class HotlineActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapter.clear();
-                searchData(newText);
+                if (newText.isEmpty()) {
+                    adapter.clear();
+                    searchData(newText);
+                }
                 return true;
             }
         });
 
         searchView.setOnCloseListener(() -> {
-            adapter.clear();
-            loadDataProvinsi();
+            Log.d("HotlineActivity", "Close:True");
             return true;
         });
     }
@@ -76,14 +99,17 @@ public class HotlineActivity extends AppCompatActivity {
     }
 
     private void loadDataProvinsi() {
+        showProgressbar(true);
         provinsiList = new ArrayList<>();
         Call<ItemIdProvinsi> call = apiServiceLokasi.getDataProvinsi();
         call.enqueue(new Callback<ItemIdProvinsi>() {
             @Override
             public void onResponse(Call<ItemIdProvinsi> call, Response<ItemIdProvinsi> response) {
                 assert response.body() != null;
-                provinsiList = response.body().getProvinsiList();
+                provinsiList.add(new IdProvinsi("1", "INDONESIA"));
+                provinsiList.addAll(response.body().getProvinsiList());
                 adapter.setProvinsiList(provinsiList);
+                showProgressbar(false);
                 rvMain.setAdapter(adapter);
             }
 
@@ -95,13 +121,15 @@ public class HotlineActivity extends AppCompatActivity {
     }
 
     private void searchData(String query) {
+        showProgressbar(true);
         provinsiList = new ArrayList<>();
         Call<ItemIdProvinsi> call = apiServiceLokasi.getDataProvinsi();
         call.enqueue(new Callback<ItemIdProvinsi>() {
             @Override
             public void onResponse(Call<ItemIdProvinsi> call, Response<ItemIdProvinsi> response) {
                 assert response.body() != null;
-                provinsiList = response.body().getProvinsiList();
+                provinsiList.add(new IdProvinsi("1", "INDONESIA"));
+                provinsiList.addAll(response.body().getProvinsiList());
                 for (IdProvinsi provinsi : provinsiList) {
                     if (provinsi.getName().toLowerCase().equals(query.toLowerCase()) ||
                             provinsi.getName().toLowerCase().contains(query.toLowerCase())) {
@@ -109,6 +137,7 @@ public class HotlineActivity extends AppCompatActivity {
                     }
                 }
                 rvMain.setAdapter(adapter);
+                showProgressbar(false);
             }
 
             @Override
@@ -122,5 +151,13 @@ public class HotlineActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) finish();
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showProgressbar(boolean state) {
+        if (state) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
     }
 }
