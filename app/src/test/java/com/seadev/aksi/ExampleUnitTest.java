@@ -1,4 +1,4 @@
-package com.seadev.kampungsiagacovid;
+package com.seadev.aksi;
 
 import org.junit.Test;
 

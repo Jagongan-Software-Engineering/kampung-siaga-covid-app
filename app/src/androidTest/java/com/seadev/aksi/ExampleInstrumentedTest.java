@@ -1,4 +1,4 @@
-package com.seadev.kampungsiagacovid;
+package com.seadev.aksi;
 
 import android.content.Context;
 
