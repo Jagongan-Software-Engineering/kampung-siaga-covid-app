@@ -1,4 +1,4 @@
-package com.seadev.kampungsiagacovid.ui;
+package com.seadev.aksi.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -17,16 +17,17 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.seadev.kampungsiagacovid.BuildConfig;
-import com.seadev.kampungsiagacovid.R;
-import com.seadev.kampungsiagacovid.model.Asesmen;
-import com.seadev.kampungsiagacovid.model.dataapi.DataHarian;
-import com.seadev.kampungsiagacovid.model.requestbody.ItemDataHarian;
-import com.seadev.kampungsiagacovid.rest.ApiClientNasional;
-import com.seadev.kampungsiagacovid.rest.ApiInterfaceNasional;
-import com.seadev.kampungsiagacovid.room.AssesmenDatabase;
-import com.seadev.kampungsiagacovid.util.DateFormater;
-import com.seadev.kampungsiagacovid.util.ReportHistoryFormater;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.seadev.aksi.BuildConfig;
+import com.seadev.aksi.R;
+import com.seadev.aksi.model.Asesmen;
+import com.seadev.aksi.model.dataapi.DataHarian;
+import com.seadev.aksi.model.requestbody.ItemDataHarian;
+import com.seadev.aksi.rest.ApiClientNasional;
+import com.seadev.aksi.rest.ApiInterfaceNasional;
+import com.seadev.aksi.room.AssesmenDatabase;
+import com.seadev.aksi.util.DateFormater;
+import com.seadev.aksi.util.ReportHistoryFormater;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -48,7 +49,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.seadev.kampungsiagacovid.room.AsesmenContract.db;
+import static com.seadev.aksi.room.AsesmenContract.db;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -191,9 +192,6 @@ public class MainActivity extends AppCompatActivity {
         Glide.with(this)
                 .load(BuildConfig.BASE_URL_LOKASI + getString(R.string.res_img_campaign))
                 .into(iconCampaign);
-        Glide.with(this)
-                .load("https://avatars1.githubusercontent.com/u/32610660?s=460&u=9a72e192859faf4ed12e8d226e9faad4bcd87bd5&v=4")
-                .into(iconUser);
     }
 
 
@@ -209,6 +207,24 @@ public class MainActivity extends AppCompatActivity {
             String msg = getString(R.string.msg_token_fmt, token);
             Log.d("TAG", msg);
         });
+
+        FirebaseMessaging.getInstance().subscribeToTopic("daily")
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Log.w("TAG", "subscribe daily failed", task.getException());
+                    }
+                    String msg = "subscribed daily";
+                    Log.w("TAG", msg);
+                });
+
+        FirebaseMessaging.getInstance().subscribeToTopic("update")
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Log.w("TAG", "subscribe update failed", task.getException());
+                    }
+                    String msg = "subscribed update";
+                    Log.w("TAG", msg);
+                });
     }
 
 
