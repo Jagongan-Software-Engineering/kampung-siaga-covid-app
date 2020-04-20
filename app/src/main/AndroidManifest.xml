@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.seadev.kampungsiagacovid">
+    package="com.seadev.aksi">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,6 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".ui.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.DetailReportActivity" />
         <activity android:name=".ui.HistoryReportActivity" />
         <activity android:name=".ui.PreventionStepActivity" />
@@ -18,9 +24,11 @@
         <activity android:name=".ui.HotlineActivity" />
         <activity android:name=".ui.DataProvinsiActivity" />
         <activity android:name=".ui.SurveyActivity" />
-        <activity android:name=".ui.RegisterActivity" />
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.RegisterActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,10 +47,10 @@
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_launcher_foreground" />
+            android:resource="@drawable/ic_forground" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/colorAccent" />
+            android:resource="@color/white" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
