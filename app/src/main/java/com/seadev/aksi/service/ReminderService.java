@@ -1,4 +1,4 @@
-package com.seadev.kampungsiagacovid.service;
+package com.seadev.aksi.service;
 
 
 import android.app.Notification;
@@ -14,8 +14,9 @@ import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.seadev.kampungsiagacovid.R;
-import com.seadev.kampungsiagacovid.ui.SurveyActivity;
+import com.seadev.aksi.R;
+import com.seadev.aksi.ui.MainActivity;
+import com.seadev.aksi.ui.SurveyActivity;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
@@ -31,7 +32,9 @@ public class ReminderService extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         if (remoteMessage.getNotification() != null) {
-            sendNotification(remoteMessage.getNotification());
+            String topics = remoteMessage.getFrom().split("/")[2];
+            Log.d(TAG, "Notif Token: " + topics);
+            sendNotification(remoteMessage.getNotification(), topics);
         }
     }
 
@@ -41,10 +44,16 @@ public class ReminderService extends FirebaseMessagingService {
         Log.d(TAG, "Refreshed token: " + s);
     }
 
-    private void sendNotification(RemoteMessage.Notification mNotif) {
+    private void sendNotification(RemoteMessage.Notification mNotif, String topics) {
         String channelId = getString(R.string.default_notification_channel_id);
         String channelName = getString(R.string.default_notification_channel_name);
-        Intent intent = new Intent(this, SurveyActivity.class);
+        Class activity;
+        if (topics.equals("update")) {
+            activity = MainActivity.class;
+        } else {
+            activity = SurveyActivity.class;
+        }
+        Intent intent = new Intent(this, activity);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
                 PendingIntent.FLAG_ONE_SHOT);
