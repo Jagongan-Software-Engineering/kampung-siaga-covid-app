@@ -1,4 +1,4 @@
-package com.seadev.kampungsiagacovid.ui
+package com.seadev.aksi.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -8,13 +8,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.bumptech.glide.Glide
 import com.github.ybq.android.spinkit.style.ThreeBounce
-import com.seadev.kampungsiagacovid.BuildConfig
-import com.seadev.kampungsiagacovid.R
-import com.seadev.kampungsiagacovid.adapter.PreventionAdapter
-import com.seadev.kampungsiagacovid.model.dataapi.TopikPencegahan
-import com.seadev.kampungsiagacovid.model.requestbody.ItemTopikPencegahan
-import com.seadev.kampungsiagacovid.rest.ApiClientLokasi
-import com.seadev.kampungsiagacovid.rest.ApiInterfaceFirebase
+import com.seadev.aksi.BuildConfig
+import com.seadev.aksi.R
+import com.seadev.aksi.adapter.PreventionAdapter
+import com.seadev.aksi.model.dataapi.TopikPencegahan
+import com.seadev.aksi.model.requestbody.ItemTopikPencegahan
+import com.seadev.aksi.rest.ApiClientLokasi
+import com.seadev.aksi.rest.ApiInterfaceFirebase
 import kotlinx.android.synthetic.main.activity_prevention.*
 import retrofit2.Call
 import retrofit2.Callback

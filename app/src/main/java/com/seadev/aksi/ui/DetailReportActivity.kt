@@ -1,4 +1,4 @@
-package com.seadev.kampungsiagacovid.ui
+package com.seadev.aksi.ui
 
 import android.content.Intent
 import android.net.Uri
@@ -13,8 +13,8 @@ import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.seadev.kampungsiagacovid.R
-import com.seadev.kampungsiagacovid.util.ReportHistoryFormater
+import com.seadev.aksi.R
+import com.seadev.aksi.util.ReportHistoryFormater
 import kotlinx.android.synthetic.main.activity_detail_report.*
 
 

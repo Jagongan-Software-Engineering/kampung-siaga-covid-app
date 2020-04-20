@@ -1,4 +1,4 @@
-package com.seadev.kampungsiagacovid.ui;
+package com.seadev.aksi.ui;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -8,12 +8,12 @@ import android.widget.ProgressBar;
 
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
-import com.seadev.kampungsiagacovid.R;
-import com.seadev.kampungsiagacovid.adapter.HotlineProvinsiAdapter;
-import com.seadev.kampungsiagacovid.model.dataapi.IdProvinsi;
-import com.seadev.kampungsiagacovid.model.requestbody.ItemIdProvinsi;
-import com.seadev.kampungsiagacovid.rest.ApiClientLokasi;
-import com.seadev.kampungsiagacovid.rest.ApiInterfaceFirebase;
+import com.seadev.aksi.R;
+import com.seadev.aksi.adapter.HotlineProvinsiAdapter;
+import com.seadev.aksi.model.dataapi.IdProvinsi;
+import com.seadev.aksi.model.requestbody.ItemIdProvinsi;
+import com.seadev.aksi.rest.ApiClientLokasi;
+import com.seadev.aksi.rest.ApiInterfaceFirebase;
 
 import java.util.ArrayList;
 import java.util.List;

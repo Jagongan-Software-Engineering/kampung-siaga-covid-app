@@ -1,13 +1,13 @@
-package com.seadev.kampungsiagacovid.ui
+package com.seadev.aksi.ui
 
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.github.islamkhsh.CardSliderIndicator
 import com.github.islamkhsh.CardSliderViewPager
-import com.seadev.kampungsiagacovid.R
-import com.seadev.kampungsiagacovid.adapter.PreventionStepAdapter
-import com.seadev.kampungsiagacovid.model.dataapi.TopikPencegahan
+import com.seadev.aksi.R
+import com.seadev.aksi.adapter.PreventionStepAdapter
+import com.seadev.aksi.model.dataapi.TopikPencegahan
 import kotlinx.android.synthetic.main.activity_prevention_step.*
 
 class PreventionStepActivity : AppCompatActivity() {

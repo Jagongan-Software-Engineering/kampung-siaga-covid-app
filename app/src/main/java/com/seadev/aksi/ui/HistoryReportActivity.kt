@@ -1,12 +1,12 @@
-package com.seadev.kampungsiagacovid.ui
+package com.seadev.aksi.ui
 
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
-import com.seadev.kampungsiagacovid.R
-import com.seadev.kampungsiagacovid.adapter.HistoryReportAdapter
-import com.seadev.kampungsiagacovid.room.AsesmenContract.db
+import com.seadev.aksi.R
+import com.seadev.aksi.adapter.HistoryReportAdapter
+import com.seadev.aksi.room.AsesmenContract.db
 import kotlinx.android.synthetic.main.activity_history_report.*
 
 class HistoryReportActivity : AppCompatActivity() {
