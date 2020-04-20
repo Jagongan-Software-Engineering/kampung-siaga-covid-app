@@ -1,4 +1,4 @@
-package com.seadev.kampungsiagacovid.ui
+package com.seadev.aksi.ui
 
 import android.content.Intent
 import android.os.Build
@@ -15,8 +15,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.room.Room
 import com.bumptech.glide.Glide
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import com.quickbirdstudios.surveykit.*
 import com.quickbirdstudios.surveykit.result.TaskResult
 import com.quickbirdstudios.surveykit.steps.CompletionStep
@@ -24,14 +24,15 @@ import com.quickbirdstudios.surveykit.steps.InstructionStep
 import com.quickbirdstudios.surveykit.steps.QuestionStep
 import com.quickbirdstudios.surveykit.steps.Step
 import com.quickbirdstudios.surveykit.survey.SurveyView
-import com.seadev.kampungsiagacovid.BuildConfig
-import com.seadev.kampungsiagacovid.R
-import com.seadev.kampungsiagacovid.model.Asesmen
-import com.seadev.kampungsiagacovid.model.DataQuestionTitle
-import com.seadev.kampungsiagacovid.room.AsesmenContract.db
-import com.seadev.kampungsiagacovid.room.AssesmenDatabase
-import com.seadev.kampungsiagacovid.util.DateFormater
-import com.seadev.kampungsiagacovid.util.ReportHistoryFormater
+import com.seadev.aksi.BuildConfig
+import com.seadev.aksi.R
+import com.seadev.aksi.model.Asesmen
+import com.seadev.aksi.model.DataQuestionTitle
+import com.seadev.aksi.model.Users
+import com.seadev.aksi.room.AsesmenContract.db
+import com.seadev.aksi.room.AssesmenDatabase
+import com.seadev.aksi.util.DateFormater
+import com.seadev.aksi.util.ReportHistoryFormater
 import kotlinx.android.synthetic.main.activity_survey.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -39,11 +40,15 @@ import java.util.*
 
 class SurveyActivity : AppCompatActivity() {
 
+    private val TAG = "SurveyActivity"
     protected lateinit var survey: SurveyView
     private lateinit var container: ViewGroup
     private lateinit var mStep: MutableList<Step>
     private lateinit var mAnswer: MutableList<Int>
-    private lateinit var database: DatabaseReference
+    private lateinit var refAssesment: DatabaseReference
+    private lateinit var refUsers: DatabaseReference
+    private lateinit var auth: FirebaseAuth
+    private var mValueEventListener: ValueEventListener? = null
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +56,9 @@ class SurveyActivity : AppCompatActivity() {
         setContentView(R.layout.activity_survey)
         supportActionBar?.title = "Koesioner Penilaian Diri"
 //        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        auth = FirebaseAuth.getInstance()
+        refAssesment = FirebaseDatabase.getInstance().reference.child("asesmen")
+        refUsers = FirebaseDatabase.getInstance().reference.child("users")
         initView()
     }
 
@@ -151,7 +159,25 @@ class SurveyActivity : AppCompatActivity() {
                     }
                     container.removeAllViews()
                 }
-                validation()
+                var users: Users? = null
+                if (mValueEventListener == null) {
+                    mValueEventListener = object : ValueEventListener {
+                        override fun onCancelled(databaseError: DatabaseError) {
+                            Log.d(TAG, "loadUser:onCancelled ${databaseError.toException()}")
+                        }
+
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            for (postSnapshot in dataSnapshot.children) {
+                                users = postSnapshot.getValue(Users::class.java)
+                            }
+                            validation(users)
+                        }
+                    }
+                    val firebaseUser = auth.currentUser
+                    refUsers.orderByChild("phone").equalTo(firebaseUser?.phoneNumber)
+                            .addValueEventListener(mValueEventListener as ValueEventListener)
+                }
+
             }
         }
 
@@ -241,15 +267,15 @@ class SurveyActivity : AppCompatActivity() {
         ))
     }
 
-    private fun validation() {
+    private fun validation(users: Users?) {
         var datePath = ""
-        var idDesa = "3209181005"
-        var idUser = "MAJ0329sjdf123"
+        var idDesa = users?.idDesa
+        var idUser = users?.idUser
         var mData = "("
         var counter = 0
         var mRisiko = ""
         var date = ""
-        var rtrw = "01/07"
+        var rtrw = users?.rtrw
         val dataValid = mutableListOf(1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -295,8 +321,7 @@ class SurveyActivity : AppCompatActivity() {
         Log.d("QuestionAnswer", "Date: $date")
         Log.d("QuestionAnswer", "Rt/Rw: $rtrw")
         val dataAsesmen = Asesmen(date, idUser, mData, counter, mRisiko, rtrw)
-        database = FirebaseDatabase.getInstance().reference
-        database.child("asesmen").child(idDesa).child(datePath).child(idUser)
+        refAssesment.child(idDesa!!).child(datePath).child(idUser!!)
                 .setValue(dataAsesmen).addOnSuccessListener {
                     Toast.makeText(this, "Data berhasil di simpan", Toast.LENGTH_SHORT).show()
                 }
