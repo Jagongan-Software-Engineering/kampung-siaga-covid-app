@@ -1,6 +1,10 @@
 
 # Aksi - Aplikasi Kampung siaga
 
+![Group 3 (1)](https://user-images.githubusercontent.com/32610660/79478160-3cce5a80-8035-11ea-95ac-be1e7248d3c5.png)
+
+## Apa itu Aksi?
+
 **Aksi** atau **Aplikasi Kampung Siaga** merupkan platform untuk memudahkan warga dalam penanganan permasalahan, khususnya untuk saat ini Aksi lebih fokus untuk sarana **pencegahan** wabah virus korona atau (Coronavirus Disease) atau **Covid-19.**
 
 Aksi memilki beberapa **fitur utama** seperti **update data covid-19** di Indonesia dan seluruh provinsinya yang di tampilkan dalam bentuk grafik yang mudah untuk di pahmi.
@@ -15,4 +19,4 @@ Aplikasi Aksi ini diharapkan dapat bermanfaat untuk masyarakat Indonesia
 
 Kamu bisa `download` beta version dari **Aksi** [disini](https://drive.google.com/drive/u/1/folders/1ex77WFm3_sdT_IvaChkol1vbaBEwByIX)
 
-![Group 3 (1)](https://user-images.githubusercontent.com/32610660/79478160-3cce5a80-8035-11ea-95ac-be1e7248d3c5.png)
+
