@@ -150,10 +150,12 @@ public class RegisterActivity extends AppCompatActivity {
     private void createNewUser() {
         mNama = etNama.getText().toString();
         mNik = etNik.getText().toString();
+        int rt = Integer.parseInt(etRt.getText().toString());
+        int rw = Integer.parseInt(etRW.getText().toString());
         mRtrw = new StringBuilder()
-                .append(etRt.getText().toString())
+                .append(rt)
                 .append("/")
-                .append(etRW.getText().toString())
+                .append(rw)
                 .toString();
         mAlamat = etAlamat.getText().toString();
 
