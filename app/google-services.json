@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1099097656987-bg84su8rthe9voejdvham9p57uejql74.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.seadev.aksi",
+            "certificate_hash": "168572651c04a68d1ba012e944e4695a90f774a1"
+          }
+        },
+        {
           "client_id": "1099097656987-mbd2rajbhqlqa3lggrbdrufthp03dktb.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -43,68 +43,70 @@ android {
         targetCompatibility = "1.8"
     }
 
+    dynamicFeatures = [":aksirtrw"]
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.71"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'com.google.firebase:firebase-analytics:17.2.3'
-    implementation 'com.google.firebase:firebase-auth:19.3.0'
-    implementation 'com.google.firebase:firebase-database:19.2.1'
-    implementation 'com.google.firebase:firebase-storage:19.1.1'
-    implementation 'com.google.firebase:firebase-messaging:20.1.3'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.firebase:firebase-inappmessaging-display:19.0.4'
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.71"
+    api 'androidx.appcompat:appcompat:1.1.0'
+    api 'androidx.constraintlayout:constraintlayout:1.1.3'
+    api 'com.google.firebase:firebase-analytics:17.2.3'
+    api 'com.google.firebase:firebase-auth:19.3.0'
+    api 'com.google.firebase:firebase-database:19.2.1'
+    api 'com.google.firebase:firebase-storage:19.1.1'
+    api 'com.google.firebase:firebase-messaging:20.1.5'
+    api 'androidx.legacy:legacy-support-v4:1.0.0'
+    api 'com.google.firebase:firebase-inappmessaging-display:19.0.4'
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     //CardView
-    implementation 'androidx.cardview:cardview:1.0.0'
+    api 'androidx.cardview:cardview:1.0.0'
     //RecycleView
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    api 'androidx.recyclerview:recyclerview:1.1.0'
     //gson
     // retrofit, gson
-    implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'com.squareup.retrofit2:converter-gson:2.7.0'
+    api 'com.google.code.gson:gson:2.8.6'
+    api 'com.squareup.retrofit2:converter-gson:2.7.0'
     //Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.7.1'
+    api 'com.squareup.retrofit2:retrofit:2.7.1'
     //Design
-    implementation 'com.google.android.material:material:1.2.0-alpha06'
+    api 'com.google.android.material:material:1.2.0-alpha06'
     //Butter Knife
-    implementation 'com.jakewharton:butterknife:10.2.1'
+    api 'com.jakewharton:butterknife:10.2.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
     //Smart Tab Library
-    implementation 'com.ogaclejapan.smarttablayout:library:2.0.0@aar'
-    implementation 'com.ogaclejapan.smarttablayout:utils-v4:2.0.0@aar'
+    api 'com.ogaclejapan.smarttablayout:library:2.0.0@aar'
+    api 'com.ogaclejapan.smarttablayout:utils-v4:2.0.0@aar'
     //Glide
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    api 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     //Android-SpinKit
-    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+    api 'com.github.ybq:Android-SpinKit:1.4.0'
     //Cart
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    api 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     // Survey
-    implementation "com.quickbirdstudios:surveykit:0.1.0"
+    api "com.quickbirdstudios:surveykit:0.1.0"
     // Expandable Cardview
-    implementation 'com.github.florent37:expansionpanel:1.2.2'
+    api 'com.github.florent37:expansionpanel:1.2.2'
     // CardSlider
-    implementation 'com.github.IslamKhSh:CardSlider:1.0.1'
+    api 'com.github.IslamKhSh:CardSlider:1.0.1'
     // room
     def room_version = '2.2.3'
     //noinspection GradleDependency
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     // Skeleton View
-    implementation 'com.ethanhua:skeleton:1.1.2'
-    implementation 'io.supercharge:shimmerlayout:2.1.0'
+    api 'com.ethanhua:skeleton:1.1.2'
+    api 'io.supercharge:shimmerlayout:2.1.0'
     //Spinner
-    implementation 'com.jaredrummler:material-spinner:1.3.1'
+    api 'com.jaredrummler:material-spinner:1.3.1'
     implementation('com.alimuzaffar.lib:pinentryedittext:2.0.6') {
         // Exclude is only needed if you already have
         // androidx.appcompat as a dependency in your app.
         exclude group: 'androidx.appcompat', module: 'appcompat'
     }
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
