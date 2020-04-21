@@ -59,4 +59,11 @@
     <string name="selesai">Selesai</string>
     <string name="app_sub_name">Aplikasi Kampung Siaga</string>
 
+    <string-array name="setting_list">
+        <item>Riwayat Penilaian Diri</item>
+        <item>Akses Rt / Rw</item>
+        <item>Keluar</item>
+    </string-array>
+    <string name="title_aksirtrw">Data Desa</string>
+
 </resources>
