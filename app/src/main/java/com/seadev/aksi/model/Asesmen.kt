@@ -1,10 +1,13 @@
 package com.seadev.aksi.model
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
 @Entity
+@Parcelize
 data class Asesmen(
         @PrimaryKey
         var date: String,
@@ -18,4 +21,6 @@ data class Asesmen(
         var risiko: String? = "",
         @ColumnInfo(name = "rtrw")
         var rtrw: String? = ""
-)
+) : Parcelable {
+    open fun Asesmen() {}
+}

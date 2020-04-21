@@ -1,5 +1,9 @@
 package com.seadev.aksi.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Users(
         var idUser: String? = "",
         var phone: String? = "",
@@ -11,4 +15,4 @@ data class Users(
         var idDesa: String? = "",
         var rtrw: String? = "",
         var nik: String? = ""
-)
+) : Parcelable

@@ -64,7 +64,8 @@ class ReportHistoryFormater {
                             "\n#DiRumahAja minimal 14 hari",
                             "\nLakukan pengisian penilaian diri secara rutin pada aplikasi ini",
                             "\nGunakan masker apabila batuk / bersin",
-                            "\nApabila mengalami gejala - gejala berikut (demam, batuk, nyeri, tenggorokan / nafas pendek, pendek / sulit bernapas) segera hubungi dokter / hotline"
+                            "\nApabila mengalami gejala - gejala berikut (demam, batuk, nyeri, tenggorokan " +
+                                    "/ nafas pendek, pendek / sulit bernapas) segera hubungi dokter / hotline"
                     )
                 }
                 "tinggi" -> {

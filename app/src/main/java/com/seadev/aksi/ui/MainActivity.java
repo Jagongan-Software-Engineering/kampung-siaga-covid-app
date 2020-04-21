@@ -174,6 +174,10 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra(DetailReportActivity.Companion.getDATA_DETAIL_EXTRA(), tvTitleReport.getText().toString().toLowerCase() + " home");
             startActivity(intent);
         });
+
+        iconUser.setOnClickListener(v -> {
+            startActivity(new Intent(this, ProfileActivity.class));
+        });
     }
 
     private void initView() {
