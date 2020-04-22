@@ -1,5 +1,6 @@
 package com.seadev.aksi.adapter
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -8,8 +9,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import com.seadev.aksi.R
 import com.seadev.aksi.ui.HistoryReportActivity
+import com.seadev.aksi.ui.LoginActivity
 import kotlinx.android.synthetic.main.item_profile.view.*
 
 
@@ -38,10 +41,15 @@ class ProfileAdapter(
                 }
                 1 -> {
                     val intent = Intent()
-                    intent.setClassName(context, "com.seadev.aksirtrw.ui.MainActivity")
+                    intent.setClassName(context, "com.seadev.aksirtrw.ui.VerificationActivity")
                     context.startActivity(intent)
                 }
-                2 -> Toast.makeText(context, nameSetting, Toast.LENGTH_SHORT).show()
+                2 -> {
+                    FirebaseAuth.getInstance().signOut()
+                    context.startActivity(Intent(context, LoginActivity::class.java))
+                    (context as Activity).finish()
+                    Toast.makeText(context, "Anda telah keluar", Toast.LENGTH_SHORT).show()
+                }
                 else -> Toast.makeText(context, "No selected", Toast.LENGTH_SHORT).show()
             }
         }
