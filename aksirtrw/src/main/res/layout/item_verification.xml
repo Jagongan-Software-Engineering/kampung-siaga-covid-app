@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:padding="16dp"
+    android:scrollbars="none">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/ivIconInfoService"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_forground" />
+
+        <TextView
+            android:id="@+id/tvInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ivIconInfoService"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="Akses Rt / Rw adalah layanan yang di buat khusus untuk ketua rt dan rw setempat agar bisa memantau kondisi dan bisa melakukan pencegahan dini kepada warganya.
+                \n\nLayanan ini memiliki beberapa akses khusus yang berkaitan dengan data, oleh karena itu hanya ketua rt / rw yang boleh mengakses layanan ini"
+            android:textAlignment="center"
+            android:textColor="@color/color_text_2" />
+
+        <CheckBox
+            android:id="@+id/cbVerification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvInfo"
+            android:layout_marginTop="16dp"
+            android:text="Saya adalah ketua rt / rw" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnNextVerify"
+            style="@style/ItemsTouchable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cbVerification"
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardCornerRadius="16dp"
+            app:cardUseCompatPadding="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:padding="8dp"
+                android:text="Lanjutkan Verifikasi"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+</ScrollView>

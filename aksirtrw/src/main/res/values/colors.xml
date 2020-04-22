@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorValid">#4C99cc00</color>
+    <color name="colorPrimaryAlpha20">#332E09D1</color>
+    <color name="colorInProress">#4Cffbb33</color>
+</resources>

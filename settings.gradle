@@ -1,2 +1,3 @@
 rootProject.name='Kampung Siaga Covid'
 include ':app'
+include ':aksirtrw'

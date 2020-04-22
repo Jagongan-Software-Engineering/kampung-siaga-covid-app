@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.VerificationActivity">
+
+    <include
+        android:id="@+id/layoutVerificationModul"
+        layout="@layout/item_verification"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/layoutUpload"
+        layout="@layout/item_upload_verification"
+        android:visibility="gone" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/layoutLoadingVerifRt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        app:cardCornerRadius="16dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="24dp">
+
+            <ProgressBar
+                android:id="@+id/pbVerifRt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/tvProgressVerifRt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pbVerifRt"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:text="Sedang memuat data ..."
+                android:textColor="@color/color_text_2"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btnBack"
+        style="@style/ItemsTouchable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/colorPrimary"
+        app:cardCornerRadius="24dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:padding="8dp"
+            android:rotation="180"
+            android:src="@drawable/ic_arrow_right"
+            android:tint="@color/white" />
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

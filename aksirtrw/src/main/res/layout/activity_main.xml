@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <include
+            android:id="@+id/layoutStatus"
+            layout="@layout/items_status" />
+
+        <include
+            android:id="@+id/layoutReport"
+            layout="@layout/item_report"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/layoutStatus" />
+
+        <include
+            android:id="@+id/layoutDataRanged"
+            layout="@layout/item_data_range"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/layoutReport" />
+
+        <TextView
+            android:id="@+id/tvLaporanHariIni"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layoutDataRanged"
+            android:padding="16dp"
+            android:text="Laporan Warga Hari ini"
+            android:textColor="@color/color_text_1"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvDailyReport"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tvLaporanHariIni"
+            android:nestedScrollingEnabled="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_list_warga" />
+
+        <include
+            android:id="@+id/layoutInProgress"
+            layout="@layout/item_layout_inprogress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/layoutStatus"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,114 @@
+{
+  "project_info": {
+    "project_number": "1099097656987",
+    "firebase_url": "https://kampung-siaga-covid-b0c8c.firebaseio.com",
+    "project_id": "kampung-siaga-covid-b0c8c",
+    "storage_bucket": "kampung-siaga-covid-b0c8c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1099097656987:android:f2ff47bf729d459967c03e",
+        "android_client_info": {
+          "package_name": "com.seadev.aksi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1099097656987-bg84su8rthe9voejdvham9p57uejql74.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.seadev.aksi",
+            "certificate_hash": "168572651c04a68d1ba012e944e4695a90f774a1"
+          }
+        },
+        {
+          "client_id": "1099097656987-mbd2rajbhqlqa3lggrbdrufthp03dktb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZAzRTx66VMoqYnM2SUKZaOAuAgvFKYjM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1099097656987-mbd2rajbhqlqa3lggrbdrufthp03dktb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1099097656987:android:c98f12cb90d035c367c03e",
+        "android_client_info": {
+          "package_name": "com.seadev.aksirtrw"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1099097656987-mbd2rajbhqlqa3lggrbdrufthp03dktb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZAzRTx66VMoqYnM2SUKZaOAuAgvFKYjM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1099097656987-mbd2rajbhqlqa3lggrbdrufthp03dktb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1099097656987:android:021c2c17a782f43767c03e",
+        "android_client_info": {
+          "package_name": "com.seadev.kampungsiagacovid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1099097656987-hegolun5lhek6m5afc2dukdng1n2bkgs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.seadev.kampungsiagacovid",
+            "certificate_hash": "dfb2dd5448c8fcfd1f884ea36d9a432604a8c607"
+          }
+        },
+        {
+          "client_id": "1099097656987-mbd2rajbhqlqa3lggrbdrufthp03dktb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZAzRTx66VMoqYnM2SUKZaOAuAgvFKYjM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1099097656987-mbd2rajbhqlqa3lggrbdrufthp03dktb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
