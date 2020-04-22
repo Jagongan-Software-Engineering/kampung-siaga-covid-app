@@ -1,6 +1,7 @@
 package com.seadev.aksi.ui;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -131,12 +132,15 @@ public class MainActivity extends AppCompatActivity {
     private ApiInterfaceNasional apiServiceNasional = ApiClientNasional.getClientNasional().create(ApiInterfaceNasional.class);
     private List<DataHarian> dataHarianList;
 
+    public static Activity activity;
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        activity = this;
 
         initView();
         initFirebase();
@@ -346,5 +350,4 @@ public class MainActivity extends AppCompatActivity {
             Log.d("MainActivity", "room-size: " + asesmenList.size());
         }
     }
-
 }
