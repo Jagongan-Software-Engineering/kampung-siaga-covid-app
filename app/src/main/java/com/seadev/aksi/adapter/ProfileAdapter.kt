@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.seadev.aksi.R
 import com.seadev.aksi.ui.HistoryReportActivity
 import com.seadev.aksi.ui.LoginActivity
+import com.seadev.aksi.ui.MainActivity
 import kotlinx.android.synthetic.main.item_profile.view.*
 
 
@@ -48,6 +49,7 @@ class ProfileAdapter(
                     FirebaseAuth.getInstance().signOut()
                     context.startActivity(Intent(context, LoginActivity::class.java))
                     (context as Activity).finish()
+                    MainActivity.activity.finish()
                     Toast.makeText(context, "Anda telah keluar", Toast.LENGTH_SHORT).show()
                 }
                 else -> Toast.makeText(context, "No selected", Toast.LENGTH_SHORT).show()

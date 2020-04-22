@@ -50,8 +50,6 @@ class LoginActivity : AppCompatActivity() {
         callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                 Log.d(TAG, "onVerificationCompleted:$credential")
-                layoutLogin.visibility = View.GONE
-                layoutVerification.visibility = View.VISIBLE
             }
 
             override fun onVerificationFailed(e: FirebaseException) {
@@ -62,6 +60,8 @@ class LoginActivity : AppCompatActivity() {
                 Log.d(TAG, "onCodeSent:$verificationId")
                 storedVerificationId = verificationId
                 resendToken = token
+                layoutLogin.visibility = View.GONE
+                layoutVerification.visibility = View.VISIBLE
             }
         }
 
@@ -86,6 +86,7 @@ class LoginActivity : AppCompatActivity() {
 
             btnLogin.visibility = View.GONE
             layoutCodeSentProgress.visibility = View.VISIBLE
+            pbCodeSent.visibility = View.VISIBLE
 
             val textPhone: String
             textPhone = if (etPhoneNumber.text[0].toString() != "0") {
