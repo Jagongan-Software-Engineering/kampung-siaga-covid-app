@@ -22,26 +22,26 @@
     <string name="question_title_2">Apakah Anda menggunakan transportasi umum seperti transportasi online, angkot, bus, taksi, kereta api?</string>
     <string name="question_title_3">Apakah Anda memakai masker pada saat berkumpul dengan orang lain?</string>
     <string name="question_title_4">Apakah Anda berjabat tangan dengan orang lain?</string>y
-    <string name="question_title_5">Apakah Anda membersihkan tangan dengan hand sanitizer / tissue basah sebelum pegang kemudi mobil/motor?</string>
-    <string name="question_title_6">Apakah Anda menyentuh benda/uang yang juga disentuh orang lain?</string>
-    <string name="question_title_7">Apakah Anda menjaga jarak 1,5 meter dengan orang lain ketika belanja, bekerja, belajar, ibadah?</string>
-    <string name="question_title_8">Apakah Anda makan di luar rumah (warung/restauran)?</string>
-    <string name="question_title_9">Apakah Anda mebersihkan tangan dengan hand sanitizer,tissue basah atau sabun setelah tiba di tujuan?</string>
+    <string name="question_title_5">Apakah Anda membersihkan tangan dengan hand sanitizer atau tissue basah sebelum berkendara?</string>
+    <string name="question_title_6">Apakah Anda menyentuh benda yang juga disentuh orang lain seperti uang?</string>
+    <string name="question_title_7">Apakah Anda menjaga jarak 1,5 meter dengan orang lain ketika belanja, bekerja, belajar, dan beribadah?</string>
+    <string name="question_title_8">Apakah Anda makan di luar rumah seperti di warung atau restoran?</string>
+    <string name="question_title_9">Apakah Anda mebersihkan tangan dengan hand sanitizer, tissue basah atau sabun setelah tiba di tujuan?</string>
     <string name="question_title_10">Apakah Anda berada di wilayah kelurahan tempat pasien tertular?</string>
 
 
     <string name="question_title_11">Apakah Anda pasang hand sanitizer di depan pintu masuk, untuk bersihkan tangan sebelum pegang gagang (handle) pintu masuk rumah?</string>
     <string name="question_title_12">Apakah Anda mencuci tangan dengan sabun setelah tiba di rumah?</string>
-    <string name="question_title_13">Apakah Anda menyediakan tissue basah / antiseptic, masker, sabun antiseptic bagi keluarga di rumah?</string>
-    <string name="question_title_14">Apakah Anda segera merendam baju dan celana bekas pakai di luar rumah ke dalam air panas/sabun?</string>
+    <string name="question_title_13">Apakah Anda menyediakan tissue basah, antiseptic, masker, dan sabun antiseptic bagi keluarga di rumah?</string>
+    <string name="question_title_14">Apakah Anda segera merendam baju dan celana bekas pakai di luar rumah ke dalam air panas atau sabun?</string>
     <string name="question_title_15">Apakah Anda segera mandi keramas setelah Anda tiba di rumah?</string>
     <string name="question_title_16">Apakah Anda mensosialisasikan check list penilaian resiko pribadi ini kepada keluarga di rumah?</string>
 
     <string name="question_title_17">Apakah Anda dalam sehari terkena cahaya matahari minimal 15 menit?</string>
-    <string name="question_title_18">Apakah Anda jalan kaki / berolahraga minimal 30 menit setiap hari?</string>
+    <string name="question_title_18">Apakah Anda jalan kaki atau berolahraga minimal 30 menit setiap hari?</string>
     <string name="question_title_19">Apakah Anda minum vitamin C dan E, dan cukup tidur?</string>
     <string name="question_title_20">Apakah Anda berusia di atas 60 tahun?</string>
-    <string name="question_title_21">Apakah Anda mempunyai penyakit jantung / diabetes / gangguan pernafasan kronik?</string>
+    <string name="question_title_21">Apakah Anda mempunyai penyakit jantung, diabetes atau gangguan pernafasan kronik?</string>
     <string name="default_notification_channel_id">Reminder</string>
     <string name="default_notification_channel_name">Reminder Notification</string>
 
@@ -62,8 +62,10 @@
     <string-array name="setting_list">
         <item>Riwayat Penilaian Diri</item>
         <item>Akses Rt / Rw</item>
+        <item>Berikan Umpan Balik</item>
         <item>Keluar</item>
     </string-array>
     <string name="title_aksirtrw">Data Desa</string>
+    <string name="feed_back_link">https://docs.google.com/forms/d/e/1FAIpQLSfei5l8L12jboyW32roKZiXCToGezKGbSIKR_wAFdKrVjjYPg/viewform</string>
 
 </resources>

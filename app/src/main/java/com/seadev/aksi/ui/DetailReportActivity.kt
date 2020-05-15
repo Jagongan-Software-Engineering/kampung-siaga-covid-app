@@ -10,7 +10,6 @@ import android.text.TextUtils
 import android.text.style.BulletSpan
 import android.view.MenuItem
 import android.view.View
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.seadev.aksi.R
@@ -24,7 +23,6 @@ class DetailReportActivity : AppCompatActivity() {
         var DATA_DETAIL_EXTRA: String = "data_detail_extra"
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_report)
@@ -33,15 +31,18 @@ class DetailReportActivity : AppCompatActivity() {
         val intent = intent.getStringExtra(DATA_DETAIL_EXTRA)!!.split(" ")
 
         tvDetailKondisi.text = ReportHistoryFormater.getTitleReport(intent[1])
-        tvDetailKondisi.setTextColor(getColor(ReportHistoryFormater.getColorReport(intent[1])))
-        contentDetailReport.setCardBackgroundColor(getColor(ReportHistoryFormater.getColorReport(intent[1])))
+        tvDetailKondisi.setTextColor(resources.getColor(ReportHistoryFormater.getColorReport(intent[1])))
+        contentDetailReport.setCardBackgroundColor(resources.getColor(ReportHistoryFormater.getColorReport(intent[1])))
+
         Glide.with(this)
                 .load(ReportHistoryFormater.getImgReport(intent[1]))
                 .into(ivDetailReport)
+
         tvDetailTitle.text = ReportHistoryFormater.getDescReport(intent[1])
+        val texHeader = ReportHistoryFormater.getTitleStep(intent[1])
+        tvHeaderStep.text = texHeader
+        val mDataStep: MutableList<String> = ReportHistoryFormater.getDetailStep(intent[1])
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            val texHeader = ReportHistoryFormater.getTitleStep(intent[1])
-            val mDataStep: MutableList<String> = ReportHistoryFormater.getDetailStep(intent[1])
             var mSpandable = mutableListOf<SpannableString>()
             mDataStep.forEach {
                 val spannable = SpannableString(it)
@@ -56,7 +57,11 @@ class DetailReportActivity : AppCompatActivity() {
             } else {
                 tvDetailStep.text = TextUtils.concat(mSpandable[0], mSpandable[1], mSpandable[2])
             }
-            tvHeaderStep.text = texHeader
+        } else {
+            tvDetailStep.text = "\n"
+            mDataStep.forEach {
+                tvDetailStep.text = "${tvDetailStep.text}${it.split("\n")[1]}\n\n"
+            }
         }
 
         when (intent[1]) {

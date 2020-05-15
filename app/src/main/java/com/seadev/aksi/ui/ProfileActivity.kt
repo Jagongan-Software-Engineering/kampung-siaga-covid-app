@@ -3,8 +3,12 @@ package com.seadev.aksi.ui
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
+import com.bumptech.glide.Glide
+import com.github.ybq.android.spinkit.sprite.Sprite
+import com.github.ybq.android.spinkit.style.ThreeBounce
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.seadev.aksi.R
@@ -36,6 +40,11 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+        val sprite: Sprite = ThreeBounce()
+        sprite.color = resources.getColor(R.color.colorPrimary)
+        pbProfile.indeterminateDrawable = sprite
+        pbProfile.visibility = View.VISIBLE
+
         dataSettings.addAll(resources.getStringArray(R.array.setting_list))
         profileAdapter = ProfileAdapter(this@ProfileActivity, dataSettings)
         rvProfile.apply {
@@ -69,9 +78,12 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun loadDataUser(users: Users?) {
+        pbProfile.visibility = View.GONE
         tvNameProfile.text = users?.nama
         tvPhoneProfile.text = users?.phone
         tvLocationProfile.text = users?.alamat
+        Glide.with(this).load(R.drawable.ic_call).into(ivIcPhoneProfile)
+        Glide.with(this).load(R.drawable.ic_location).into(ivIcLocationProfile)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

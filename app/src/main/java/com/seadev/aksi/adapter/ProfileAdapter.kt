@@ -3,6 +3,7 @@ package com.seadev.aksi.adapter
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.seadev.aksi.R
+import com.seadev.aksi.rtrw.ui.VerificationActivity
 import com.seadev.aksi.ui.HistoryReportActivity
 import com.seadev.aksi.ui.LoginActivity
 import com.seadev.aksi.ui.MainActivity
@@ -31,21 +33,33 @@ class ProfileAdapter(
 
     override fun onBindViewHolder(holder: ProfileViewHolder, position: Int) {
         val nameSetting = listSettigs[position]
+
+        val dataImg = listOf(
+                R.drawable.ic_arrow_right,
+                R.drawable.ic_arrow_right,
+                R.drawable.ic_feed_back,
+                R.drawable.ic_log_out
+        )
+
         holder.view.tvItemProfile.text = nameSetting
-        if (position == (listSettigs.size - 1)) {
-            Glide.with(context).load(R.drawable.ic_log_out).into(holder.view.ivItemProfile)
-        }
+        Glide.with(context).load(dataImg[position]).into(holder.view.ivItemProfile)
+
         holder.view.layoutItemProfile.setOnClickListener {
             when (position) {
                 0 -> {
                     context.startActivity(Intent(context, HistoryReportActivity::class.java))
                 }
                 1 -> {
-                    val intent = Intent()
-                    intent.setClassName(context, "com.seadev.aksirtrw.ui.VerificationActivity")
-                    context.startActivity(intent)
+                    holder.move()
                 }
                 2 -> {
+                    val mIntent = Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse(context.getString(R.string.feed_back_link))
+                    )
+                    context.startActivity(mIntent)
+                }
+                3 -> {
                     FirebaseAuth.getInstance().signOut()
                     context.startActivity(Intent(context, LoginActivity::class.java))
                     (context as Activity).finish()
@@ -57,5 +71,12 @@ class ProfileAdapter(
         }
     }
 
-    class ProfileViewHolder(val view: View) : RecyclerView.ViewHolder(view)
+    class ProfileViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+        private var mySessionId: Int? = null
+
+        fun move() {
+            view.context.startActivity(Intent(view.context, VerificationActivity::class.java))
+        }
+
+    }
 }

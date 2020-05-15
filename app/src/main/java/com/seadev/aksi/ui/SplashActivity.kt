@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.github.ybq.android.spinkit.sprite.Sprite
 import com.github.ybq.android.spinkit.style.ThreeBounce
@@ -24,6 +25,7 @@ class SplashActivity : AppCompatActivity() {
         val sprite: Sprite = ThreeBounce()
         sprite.color = resources.getColor(R.color.colorPrimary)
         pbSplash.indeterminateDrawable = sprite
+        pbSplash.visibility = View.VISIBLE
 
         Handler().postDelayed({
             auth = FirebaseAuth.getInstance()

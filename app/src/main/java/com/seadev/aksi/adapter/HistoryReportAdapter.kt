@@ -3,11 +3,9 @@ package com.seadev.aksi.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.seadev.aksi.R
@@ -20,9 +18,8 @@ import com.seadev.aksi.util.ReportHistoryFormater.Companion.getDescReport
 import com.seadev.aksi.util.ReportHistoryFormater.Companion.getImgReport
 import com.seadev.aksi.util.ReportHistoryFormater.Companion.getTitleReport
 import kotlinx.android.synthetic.main.item_asesmen.view.*
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import java.text.SimpleDateFormat
+import java.util.*
 
 class HistoryReportAdapter(
         val context: Context,
@@ -36,24 +33,23 @@ class HistoryReportAdapter(
 
     override fun getItemCount(): Int = listAsesmenReport.size
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     override fun onBindViewHolder(holder: ReportViewHolder, position: Int) {
         holder.bindView(context, listAsesmenReport[position])
     }
 
     class ReportViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         @SuppressLint("SetTextI18n")
-        @RequiresApi(Build.VERSION_CODES.O)
         fun bindView(context: Context, asesmen: Asesmen) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-                val nowDate = LocalDateTime.now().format(formatter)
-                val dateTime = LocalDate.parse(asesmen.date, formatter)
-                val date = DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy").format(dateTime)
-                val listDate = date.split(" ").toTypedArray()
-                val isToday = if (nowDate == asesmen.date) 1 else 0
-                itemView.tv_date_report.text = "${DateFormater.getHari(listDate[0], isToday)}, ${listDate[1]} ${DateFormater.getBulan(listDate[2])} ${listDate[3]}"
-            }
+
+            val formatter = SimpleDateFormat("dd-MM-yyyy")
+            val nowDate = formatter.format(Date())
+            val dateTime = formatter.parse(asesmen.date)
+            val date = SimpleDateFormat("EEEE dd MMMM yyyy").format(dateTime)
+            val listDate = date.split(" ").toTypedArray()
+            val isToday = if (nowDate == asesmen.date) 1 else 0
+            itemView.tv_date_report.text = "${DateFormater.getHari(listDate[0], isToday)}, ${listDate[1]} ${DateFormater.getBulan(listDate[2])} ${listDate[3]}"
+
             itemView.tv_title_report.text = getTitleReport(asesmen.risiko!!)
             itemView.tv_desc_report.text = getDescReport(asesmen.risiko!!)
             Glide.with(context)

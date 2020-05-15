@@ -3,7 +3,6 @@ package com.seadev.aksi.ui;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,14 +31,13 @@ import com.seadev.aksi.util.ReportHistoryFormater;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.room.Room;
@@ -134,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static Activity activity;
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -240,7 +237,6 @@ public class MainActivity extends AppCompatActivity {
         dataHarianList = new ArrayList<>();
         Call<ItemDataHarian> call = apiServiceNasional.getDataHarian();
         call.enqueue(new Callback<ItemDataHarian>() {
-            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onResponse(Call<ItemDataHarian> call, Response<ItemDataHarian> response) {
                 assert response.body() != null;
@@ -264,17 +260,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @SuppressLint("SetTextI18n")
     private void setDataHarian(DataHarian dataHarian) {
         List<PieEntry> pieEntries = new ArrayList<>();
         List<Integer> colors = new ArrayList<>();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            colors.add(getColor(android.R.color.holo_green_light));
-            colors.add(getColor(android.R.color.holo_orange_light));
-            colors.add(getColor(android.R.color.holo_red_light));
-        }
+        colors.add(getResources().getColor(android.R.color.holo_green_light));
+        colors.add(getResources().getColor(android.R.color.holo_orange_light));
+        colors.add(getResources().getColor(android.R.color.holo_red_light));
 
         pieEntries.add(new PieEntry((float) dataHarian.getAttributes().getSembuh(), "Sembuh"));
         pieEntries.add(new PieEntry((float) dataHarian.getAttributes().getDalamPerawatan(), "Dirawat"));
@@ -312,7 +305,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @SuppressLint({"SetTextI18n", "CheckResult"})
-    @RequiresApi(api = Build.VERSION_CODES.O)
     private void fechDatabaseAsesmen() {
         db = Room.databaseBuilder(Objects.requireNonNull(this),
                 AssesmenDatabase.class, "db_asesmen").allowMainThreadQueries().build();
@@ -320,24 +312,29 @@ public class MainActivity extends AppCompatActivity {
         if (!asesmenList.isEmpty()) {
             layoutHistory.setVisibility(View.VISIBLE);
             Asesmen asesmen = asesmenList.get(asesmenList.size() - 1);
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                String nowDate = LocalDateTime.now().format(formatter);
-                LocalDate dateTime = LocalDate.parse(asesmen.getDate(), formatter);
-                String date = DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy").format(dateTime);
+
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            String nowDate = formatter.format(new Date());
+            Date dateTime;
+            try {
+                dateTime = formatter.parse(asesmen.getDate());
+                assert dateTime != null;
+                String date = new SimpleDateFormat("EEEE dd MMMM yyyy").format(dateTime);
                 String[] listDate = date.split(" ");
                 int isToday = (nowDate.equals(asesmen.getDate())) ? 1 : 0;
+
                 tvDateReport.setText(DateFormater.Companion.getHari(listDate[0], isToday) + ", " + listDate[1] + " " + DateFormater.Companion.getBulan(listDate[2]) + " " + listDate[3]);
+            } catch (ParseException e) {
+                Log.d("MainActivity", "fechDatabaseAsesmen: " + e);
             }
+
             tvTitleReport.setText(ReportHistoryFormater.Companion.getTitleReport(asesmen.getRisiko()));
             tvDescReport.setText(ReportHistoryFormater.Companion.getDescReport(asesmen.getRisiko()));
             Glide.with(this)
                     .load(ReportHistoryFormater.Companion.getImgReport(asesmen.getRisiko()))
                     .into(imgReport);
-            imgReport.setBackgroundColor(getColor(ReportHistoryFormater.Companion.getColorReport(asesmen.getRisiko())));
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            String nowDate = LocalDateTime.now().format(formatter);
+            imgReport.setBackgroundColor(getResources().getColor(ReportHistoryFormater.Companion.getColorReport(asesmen.getRisiko())));
 
             if (nowDate.equals(asesmen.getDate())) {
                 layoutCampaign.setVisibility(View.GONE);

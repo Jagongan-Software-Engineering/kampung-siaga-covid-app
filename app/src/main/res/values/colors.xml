@@ -8,4 +8,8 @@
     <color name="color_text_2">#373737</color>
     <color name="color_text_3">#818181</color>
     <color name="skeleton">#B4B4B4</color>
+
+    <color name="colorValid">#4C99cc00</color>
+    <color name="colorPrimaryAlpha20">#332E09D1</color>
+    <color name="colorInProress">#4Cffbb33</color>
 </resources>

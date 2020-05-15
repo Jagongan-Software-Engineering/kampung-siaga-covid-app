@@ -42,7 +42,6 @@
                     android:layout_height="20dp"
                     android:layout_below="@id/tvNameProfile"
                     android:layout_marginTop="8dp"
-                    android:src="@drawable/ic_call"
                     android:tint="@color/colorPrimary" />
 
                 <TextView
@@ -64,7 +63,6 @@
                     android:layout_height="20dp"
                     android:layout_below="@id/tvPhoneProfile"
                     android:layout_marginTop="8dp"
-                    android:src="@drawable/ic_location"
                     android:tint="@color/colorPrimary" />
 
                 <TextView
@@ -79,6 +77,12 @@
                     android:ellipsize="end"
                     android:maxLines="2"
                     android:textColor="@color/color_text_2" />
+
+                <ProgressBar
+                    android:id="@+id/pbProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true" />
 
             </RelativeLayout>
 

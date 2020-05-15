@@ -1,7 +1,6 @@
 package com.seadev.aksi.ui
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
@@ -9,7 +8,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -34,8 +32,7 @@ import com.seadev.aksi.room.AssesmenDatabase
 import com.seadev.aksi.util.DateFormater
 import com.seadev.aksi.util.ReportHistoryFormater
 import kotlinx.android.synthetic.main.activity_survey.*
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import java.text.SimpleDateFormat
 import java.util.*
 
 class SurveyActivity : AppCompatActivity() {
@@ -50,11 +47,10 @@ class SurveyActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private var mValueEventListener: ValueEventListener? = null
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_survey)
-        supportActionBar?.title = "Koesioner Penilaian Diri"
+        supportActionBar?.title = "Kuesioner Penilaian Diri"
 //        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         auth = FirebaseAuth.getInstance()
         refAssesment = FirebaseDatabase.getInstance().reference.child("asesmen")
@@ -68,36 +64,34 @@ class SurveyActivity : AppCompatActivity() {
         val asesmenList = db.asesmenDao().dataAsesmen
         if (!asesmenList.isEmpty()) {
             val (date1) = asesmenList[asesmenList.size - 1]
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-                val nowDate = LocalDateTime.now().format(formatter)
-                val isToday = if (nowDate == date1) 1 else 0
-                if (isToday == 1) {
-                    layoutScroll.visibility = View.VISIBLE
-                    layoutDoneSurvey.visibility = View.VISIBLE
+            val formatter = SimpleDateFormat("dd-MM-yyyy")
+            val nowDate = formatter.format(Date())
+            val isToday = if (nowDate == date1) 1 else 0
+            if (isToday == 1) {
+                layoutScroll.visibility = View.VISIBLE
+                layoutDoneSurvey.visibility = View.VISIBLE
+                layoutGuideSurvey.visibility = View.GONE
+                btnSurveyBack.setOnClickListener { finish() }
+                Glide.with(this)
+                        .load(BuildConfig.BASE_URL_LOKASI + getString(R.string.res_icon_assesment))
+                        .into(ivImgDoneSurvey)
+            } else {
+                Glide.with(this)
+                        .load(BuildConfig.BASE_URL_LOKASI + "res%2F068-settings.png?alt=media&token=700c2e17-e8d0-4ef5-b9a6-9a8804e1e294")
+                        .into(ivImgGuideSurvey)
+                btnGuideOK.setOnClickListener {
+                    layoutScroll.visibility = View.GONE
+                    layoutDoneSurvey.visibility = View.GONE
                     layoutGuideSurvey.visibility = View.GONE
-                    btnSurveyBack.setOnClickListener { finish() }
-                    Glide.with(this)
-                            .load(BuildConfig.BASE_URL_LOKASI + getString(R.string.res_icon_assesment))
-                            .into(ivImgDoneSurvey)
-                } else {
-                    Glide.with(this)
-                            .load(BuildConfig.BASE_URL_LOKASI + "res%2F068-settings.png?alt=media&token=700c2e17-e8d0-4ef5-b9a6-9a8804e1e294")
-                            .into(ivImgGuideSurvey)
-                    btnGuideOK.setOnClickListener {
-                        layoutScroll.visibility = View.GONE
-                        layoutDoneSurvey.visibility = View.GONE
-                        layoutGuideSurvey.visibility = View.GONE
-                        survey_view.visibility = View.VISIBLE
-                        survey = findViewById(R.id.survey_view)
-                        survey.onCancelPendingInputEvents()
-                        container = findViewById(R.id.surveyContainer)
-                        initialQuestion()
-                        setupSurvey(survey)
-
-                    }
+                    survey_view.visibility = View.VISIBLE
+                    survey = findViewById(R.id.survey_view)
+                    survey.onCancelPendingInputEvents()
+                    container = findViewById(R.id.surveyContainer)
+                    initialQuestion()
+                    setupSurvey(survey)
 
                 }
+
             }
         } else {
             Glide.with(this)
@@ -278,18 +272,13 @@ class SurveyActivity : AppCompatActivity() {
         var rtrw = users?.rtrw
         val dataValid = mutableListOf(1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val current = LocalDateTime.now()
-            val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-            val formatter2 = DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy HH:mm")
-            datePath = current.format(formatter)
-            val formatted2 = current.format(formatter2)
-            val listDate = formatted2.split(" ")
-            date = "${DateFormater.getHari(listDate[0], 0)}, ${listDate[1]} ${DateFormater.getBulan(listDate[2])} ${listDate[3]}, ${listDate[4]}"
-
-        } else {
-            Log.d("QuestionAnswer", "error")
-        }
+        val current = Date()
+        val formatter = SimpleDateFormat("dd-MM-yyyy")
+        val formatter2 = SimpleDateFormat("EEEE dd MMMM yyyy HH:mm")
+        datePath = formatter.format(current)
+        val formatted2 = formatter2.format(current)
+        val listDate = formatted2.split(" ")
+        date = "${DateFormater.getHari(listDate[0], 0)}, ${listDate[1]} ${DateFormater.getBulan(listDate[2])} ${listDate[3]}, ${listDate[4]}"
 
         mAnswer.forEachIndexed { index, i ->
             if (i == dataValid[index]) counter++

@@ -76,7 +76,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:digits="1234567890"
-                        android:hint="Nomor Induk Keluarga"
+                        android:hint="Nomor Induk Kependudukan"
                         android:inputType="number"
                         tools:layout_editor_absoluteX="16dp" />
 
