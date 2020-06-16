@@ -253,10 +253,8 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("MainActivity", "mDate: " + mDate);
                         if (dataHarian.getAttributes().getKasusTotal() != 0) {
                             index++;
-                            break;
-                        } else {
-                            break;
                         }
+                        break;
                     } else {
                         index++;
                     }
