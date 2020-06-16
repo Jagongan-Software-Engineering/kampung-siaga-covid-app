@@ -20,7 +20,7 @@ public interface ApiInterfaceFirebase {
     @GET("districts.json?alt=media&token=84dd113f-01e6-4871-adc8-6f1805d931b4")
     Call<ItemIdKecamatan> getDataKecamatan();
 
-    @GET("villages.json?alt=media&token=9ebc1e4a-3804-4031-bc50-c7dd7316a95c")
+    @GET("villages.json?alt=media&token=eb474495-4f8b-4597-a64c-5d6856e90dc0")
     Call<ItemIdDesa> getDataDesa();
 
     @GET("hotline.json?alt=media&token=5b30aaeb-74a8-46be-b055-2f382792b89c")
