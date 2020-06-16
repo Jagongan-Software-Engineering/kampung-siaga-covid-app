@@ -243,10 +243,22 @@ public class MainActivity extends AppCompatActivity {
                 dataHarianList = response.body().getDataHarianList();
                 int index = 0;
                 for (DataHarian dataHarian : dataHarianList) {
-                    if (dataHarian.getAttributes().getKasusTotal() != 0) {
-                        index++;
+
+                    Date date1 = new Date(dataHarian.getAttributes().getTgl());
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                    String mDate = formatter.format(date1);
+                    String now = formatter.format(new Date());
+
+                    if (now.equals(mDate)) {
+                        Log.d("MainActivity", "mDate: " + mDate);
+                        if (dataHarian.getAttributes().getKasusTotal() != 0) {
+                            index++;
+                            break;
+                        } else {
+                            break;
+                        }
                     } else {
-                        break;
+                        index++;
                     }
                 }
                 DataHarian dataHarian = dataHarianList.get(index - 1);
