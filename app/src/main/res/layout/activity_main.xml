@@ -20,10 +20,21 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:id="@+id/imageIttp"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:padding="16dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/iitpeh" />
+
+            <ImageView
                 android:id="@+id/imageToolBar"
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
+                android:layout_marginStart="-12dp"
+                android:layout_toEndOf="@id/imageIttp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_forground" />
 
@@ -32,6 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:layout_marginStart="-8dp"
                 android:layout_marginTop="6dp"
                 android:layout_toEndOf="@id/imageToolBar"
                 android:text="@string/app_name"
@@ -43,6 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/titleToolbar"
+                android:layout_marginStart="-8dp"
                 android:layout_marginTop="-5dp"
                 android:layout_marginBottom="4dp"
                 android:layout_toEndOf="@id/imageToolBar"
@@ -62,13 +75,13 @@
                 app:cardUseCompatPadding="true">
 
                 <ImageView
-                    android:padding="8dp"
                     android:id="@+id/iv_icon_user"
                     style="@style/ItemsTouchable"
-                    android:scaleType="centerCrop"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
+                    android:padding="8dp"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/ic_user" />
 
             </androidx.cardview.widget.CardView>
@@ -137,10 +150,10 @@
                                 android:layout_below="@id/tvTitleCampaing"
                                 android:layout_alignParentStart="true"
                                 android:layout_marginTop="8dp"
-                                android:textColor="@color/color_text_2"
                                 android:layout_marginEnd="16dp"
                                 android:layout_toStartOf="@id/ivCampaign"
-                                android:text="Ayo isi penilaan diri untuk mengetahi kondisi kamu sekarang" />
+                                android:text="Ayo isi penilaan diri untuk mengetahi kondisi kamu sekarang"
+                                android:textColor="@color/color_text_2" />
 
                             <TextView
                                 android:layout_width="wrap_content"
