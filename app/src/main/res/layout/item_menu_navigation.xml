@@ -31,12 +31,13 @@
             app:layout_constraintGuide_percent="0.75" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/btn_menu_data_covid"
+            android:id="@+id/btnDataCovid"
             style="@style/ItemsTouchable"
             android:layout_width="0dp"
-            android:layout_height="85dp"
+            android:layout_height="0dp"
             android:layout_margin="10dp"
             app:cardCornerRadius="16dp"
+            app:layout_constraintDimensionRatio="1:1"
             app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,15 +59,16 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_menu_data_covid" />
+            app:layout_constraintTop_toBottomOf="@+id/btnDataCovid" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/btn_menu_lapor_diri"
+            android:id="@+id/btnLapor"
             style="@style/ItemsTouchable"
             android:layout_width="0dp"
-            android:layout_height="85dp"
+            android:layout_height="0dp"
             android:layout_margin="10dp"
             app:cardCornerRadius="16dp"
+            app:layout_constraintDimensionRatio="1:1"
             app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toStartOf="@+id/guideline4"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -88,15 +90,16 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/guideline4"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toBottomOf="@+id/btn_menu_lapor_diri" />
+            app:layout_constraintTop_toBottomOf="@+id/btnLapor" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/btn_menu_hotline"
+            android:id="@+id/btnHotline"
             style="@style/ItemsTouchable"
             android:layout_width="0dp"
-            android:layout_height="85dp"
+            android:layout_height="0dp"
             android:layout_margin="10dp"
             app:cardCornerRadius="16dp"
+            app:layout_constraintDimensionRatio="1:1"
             app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toStartOf="@+id/guideline5"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
@@ -118,13 +121,14 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/guideline5"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toBottomOf="@+id/btn_menu_hotline" />
+            app:layout_constraintTop_toBottomOf="@+id/btnHotline" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/btn_menu_pencegahan"
+            android:id="@+id/btnPencegahan"
             style="@style/ItemsTouchable"
             android:layout_width="0dp"
-            android:layout_height="85dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
             android:layout_margin="10dp"
             app:cardCornerRadius="16dp"
             app:cardUseCompatPadding="true"
@@ -148,7 +152,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline5"
-            app:layout_constraintTop_toBottomOf="@+id/btn_menu_pencegahan" />
+            app:layout_constraintTop_toBottomOf="@+id/btnPencegahan" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

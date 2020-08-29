@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/contentMain"
     android:layout_height="match_parent"
     android:paddingStart="16dp"
     android:paddingTop="16dp"
@@ -44,6 +45,7 @@
 
 
     <include
+        android:id="@+id/layoutAssesment"
         layout="@layout/item_asesmen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

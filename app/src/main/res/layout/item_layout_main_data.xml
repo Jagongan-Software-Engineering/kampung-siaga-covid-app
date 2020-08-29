@@ -26,7 +26,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_circle"
-                android:tint="@android:color/darker_gray" />
+                app:tint="@android:color/darker_gray" />
 
             <TextView
                 android:id="@+id/tvTitlePositif"
@@ -37,7 +37,7 @@
                 android:text="Positif" />
 
             <TextView
-                android:id="@+id/tv_confirmed"
+                android:id="@+id/tvConfirm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvTitlePositif"
@@ -47,13 +47,13 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tv_new_positive"
+                android:id="@+id/tvNewConfirm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvTitlePositif"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_toEndOf="@id/tv_confirmed"
+                android:layout_toEndOf="@id/tvConfirm"
                 android:textColor="@color/colorAccent" />
 
         </RelativeLayout>
@@ -82,7 +82,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_circle"
-                android:tint="@android:color/holo_green_light" />
+                app:tint="@android:color/holo_green_light" />
 
             <TextView
                 android:id="@+id/tvTitleRecover"
@@ -93,7 +93,7 @@
                 android:text="Sembuh" />
 
             <TextView
-                android:id="@+id/tv_recover"
+                android:id="@+id/tvRecover"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvTitleRecover"
@@ -103,13 +103,13 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tv_new_recover"
+                android:id="@+id/tvNewRecover"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvTitleRecover"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_toEndOf="@id/tv_recover"
+                android:layout_toEndOf="@id/tvRecover"
                 android:textColor="@color/colorAccent" />
 
         </RelativeLayout>
@@ -138,7 +138,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_circle"
-                android:tint="@android:color/holo_orange_light" />
+                app:tint="@android:color/holo_orange_light" />
 
             <TextView
                 android:id="@+id/tvTitleInCare"
@@ -149,7 +149,7 @@
                 android:text="Dirawat" />
 
             <TextView
-                android:id="@+id/tv_in_care"
+                android:id="@+id/tvInCare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvTitleInCare"
@@ -159,13 +159,13 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tv_new_in_care"
+                android:id="@+id/tvNewInCare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvTitleInCare"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_toEndOf="@id/tv_in_care"
+                android:layout_toEndOf="@id/tvInCare"
                 android:textColor="@color/colorAccent" />
 
         </RelativeLayout>
@@ -194,7 +194,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_circle"
-                android:tint="@android:color/holo_red_light" />
+                app:tint="@android:color/holo_red_light" />
 
             <TextView
                 android:id="@+id/tvTitleDied"
@@ -205,7 +205,7 @@
                 android:text="Meninggal" />
 
             <TextView
-                android:id="@+id/tv_died"
+                android:id="@+id/tvDied"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvTitleDied"
@@ -215,13 +215,13 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tv_new_died"
+                android:id="@+id/tvNewDied"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvTitleDied"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_toEndOf="@id/tv_died"
+                android:layout_toEndOf="@id/tvDied"
                 android:textColor="@color/colorAccent" />
 
         </RelativeLayout>

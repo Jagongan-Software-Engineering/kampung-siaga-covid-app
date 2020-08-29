@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_content_asesment"
+        android:id="@+id/contentAsesmen"
         style="@style/ItemsTouchable"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -32,7 +32,7 @@
                 <ImageView
                     android:padding="16dp"
                     android:tint="@color/white"
-                    android:id="@+id/iv_history_report"
+                    android:id="@+id/imgReport"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/colorPrimary" />
@@ -40,7 +40,7 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/tv_title_report"
+                android:id="@+id/tvTitleReport"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -53,20 +53,20 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_desc_report"
+                android:id="@+id/tvDescReport"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:textColor="@color/color_text_2"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="Anda tidak memiliki gejala maupun riwayat paparan terkait Covid-19"
-                app:layout_constraintBottom_toTopOf="@+id/tv_date_report"
+                app:layout_constraintBottom_toTopOf="@+id/tvDateReport"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/cardView7"
-                app:layout_constraintTop_toBottomOf="@+id/tv_title_report" />
+                app:layout_constraintTop_toBottomOf="@+id/tvTitleReport" />
 
             <TextView
-                android:id="@+id/tv_date_report"
+                android:id="@+id/tvDateReport"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"

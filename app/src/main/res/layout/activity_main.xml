@@ -75,7 +75,7 @@
                 app:cardUseCompatPadding="true">
 
                 <ImageView
-                    android:id="@+id/iv_icon_user"
+                    android:id="@+id/iconUser"
                     style="@style/ItemsTouchable"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -96,7 +96,7 @@
         android:layout_height="match_parent">
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh_main"
+            android:id="@+id/refreshLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -114,7 +114,7 @@
                     android:orientation="vertical">
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/cv_campaign"
+                        android:id="@+id/layoutCampaign"
                         style="@style/ItemsTouchable"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -183,7 +183,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <include
-                        android:id="@+id/layout_history_report"
+                        android:id="@+id/layoutHistoryReport"
                         layout="@layout/item_history_report"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -193,7 +193,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/cv_campaign" />
 
                     <include
-                        android:id="@+id/layout_navigation"
+                        android:id="@+id/layoutNavigation"
                         layout="@layout/item_menu_navigation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -201,7 +201,7 @@
                         android:layout_marginEnd="16dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/layout_history_report" />
+                        app:layout_constraintTop_toBottomOf="@+id/layoutHistoryReport" />
 
                     <include
                         android:id="@+id/layout_overview"
@@ -212,9 +212,10 @@
                         android:layout_marginEnd="16dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/layout_navigation" />
+                        app:layout_constraintTop_toBottomOf="@+id/layoutNavigation" />
 
                     <include
+                        android:id="@+id/layoutMainData"
                         layout="@layout/item_layout_main_data"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

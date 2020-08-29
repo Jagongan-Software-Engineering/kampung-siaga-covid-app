@@ -179,10 +179,10 @@
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/title_died" />
+                    app:layout_constraintTop_toBottomOf="@id/tvPersenMeninggal" />
 
                 <TextView
-                    android:id="@+id/title_died"
+                    android:id="@+id/tvInCare"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Risiko Tinggi"
