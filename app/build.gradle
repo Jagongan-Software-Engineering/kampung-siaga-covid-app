@@ -3,6 +3,12 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+ext.majorVersion = 1
+ext.minorVersion = 1
+ext.patchVersion = 3
+ext.preRelease = ""
+ext.minSdkVersion = 21
+
 android {
     signingConfigs {
         release {
@@ -12,8 +18,8 @@ android {
             keyPassword 'android'
         }
     }
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    compileSdkVersion 30
+    buildToolsVersion "29.0.3"
 
     androidExtensions {
         experimental = true
@@ -21,10 +27,10 @@ android {
 
     defaultConfig {
         applicationId "com.seadev.aksi"
-        minSdkVersion 21
-        targetSdkVersion 29
-        versionCode 5
-        versionName "1.1.2"
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion 30
+        versionCode generateVersionCode()
+        versionName generateVersionName()
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "BASE_URL_NASIONAL", "\"https://services5.arcgis.com/VS6HdKS0VfIhv8Ct/arcgis/rest/services/\""
@@ -47,6 +53,17 @@ android {
 
     buildFeatures {
         viewBinding = true
+    }
+}
+
+private Integer generateVersionCode() {
+    return ext.minSdkVersion * 10000000 + ext.majorVersion * 10000 + ext.minorVersion * 100 + ext.patchVersion
+}
+
+private String generateVersionName() {
+    String versionName = "${ext.majorVersion}.${ext.minorVersion}.${ext.patchVersion}"
+    if (ext.preRelease != null && !ext.preRelease.isEmpty()) {
+        versionName = versionName + "-" + ext.preRelease
     }
 }
 
