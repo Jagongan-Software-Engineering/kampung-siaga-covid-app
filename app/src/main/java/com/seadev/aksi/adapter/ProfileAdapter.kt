@@ -63,7 +63,7 @@ class ProfileAdapter(
                     FirebaseAuth.getInstance().signOut()
                     context.startActivity(Intent(context, LoginActivity::class.java))
                     (context as Activity).finish()
-                    MainActivity.activity.finish()
+                    MainActivity.activity!!.finish()
                     Toast.makeText(context, "Anda telah keluar", Toast.LENGTH_SHORT).show()
                 }
                 else -> Toast.makeText(context, "No selected", Toast.LENGTH_SHORT).show()

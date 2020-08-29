@@ -30,7 +30,7 @@ import com.seadev.aksi.rtrw.adapter.DailyReportAdapter
 import com.seadev.aksi.rtrw.model.Assessment
 import com.seadev.aksi.rtrw.model.KetuaRt
 import com.seadev.aksi.util.DateFormater
-import com.seadev.aksi.util.toTitleCase
+import com.seadev.aksi.util.UiHelper.toTitleCase
 import kotlinx.android.synthetic.main.activity_main_rt.*
 import kotlinx.android.synthetic.main.item_data_range.*
 import kotlinx.android.synthetic.main.item_report.*

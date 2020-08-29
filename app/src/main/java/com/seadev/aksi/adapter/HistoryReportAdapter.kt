@@ -48,15 +48,15 @@ class HistoryReportAdapter(
             val date = SimpleDateFormat("EEEE dd MMMM yyyy").format(dateTime)
             val listDate = date.split(" ").toTypedArray()
             val isToday = if (nowDate == asesmen.date) 1 else 0
-            itemView.tv_date_report.text = "${DateFormater.getHari(listDate[0], isToday)}, ${listDate[1]} ${DateFormater.getBulan(listDate[2])} ${listDate[3]}"
+            itemView.tvDateReport.text = "${DateFormater.getHari(listDate[0], isToday)}, ${listDate[1]} ${DateFormater.getBulan(listDate[2])} ${listDate[3]}"
 
-            itemView.tv_title_report.text = getTitleReport(asesmen.risiko!!)
-            itemView.tv_desc_report.text = getDescReport(asesmen.risiko!!)
+            itemView.tvTitleReport.text = getTitleReport(asesmen.risiko!!)
+            itemView.tvDescReport.text = getDescReport(asesmen.risiko!!)
             Glide.with(context)
                     .load(getImgReport(asesmen.risiko!!))
-                    .into(itemView.iv_history_report)
-            itemView.iv_history_report.setBackgroundColor(context.getColor(getColorReport(asesmen.risiko!!)))
-            itemView.cv_content_asesment.setOnClickListener {
+                    .into(itemView.imgReport)
+            itemView.imgReport.setBackgroundColor(context.getColor(getColorReport(asesmen.risiko!!)))
+            itemView.contentAsesmen.setOnClickListener {
                 val intent = Intent(context, DetailReportActivity::class.java)
                 intent.putExtra(DATA_DETAIL_EXTRA, getTitleReport(asesmen.risiko!!).toLowerCase() + " home")
                 context.startActivity(intent)
