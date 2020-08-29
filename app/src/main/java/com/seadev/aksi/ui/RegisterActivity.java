@@ -33,7 +33,7 @@ import com.seadev.aksi.model.requestbody.ItemIdKotaKab;
 import com.seadev.aksi.model.requestbody.ItemIdProvinsi;
 import com.seadev.aksi.rest.ApiClientLokasi;
 import com.seadev.aksi.rest.ApiInterfaceFirebase;
-import com.seadev.aksi.util.StringUtilKt;
+import com.seadev.aksi.util.UiHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -462,7 +462,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void setDataSpinerProvinsi(List<IdProvinsi> idProvinsis) {
         List<String> mProvinsiList = new ArrayList<>();
         for (IdProvinsi provinsi : idProvinsis)
-            mProvinsiList.add(StringUtilKt.toTitleCase(provinsi.getName()));
+            mProvinsiList.add(UiHelper.INSTANCE.toTitleCase(provinsi.getName()));
         spProvinsi.setItems(mProvinsiList);
         spProvinsi.setOnItemSelectedListener((view, position, id, item) -> {
             mIdProvinsi = idProvinsis.get(position).getId();
@@ -476,7 +476,7 @@ public class RegisterActivity extends AppCompatActivity {
         List<String> mId = new ArrayList<>();
         for (IdKotaKab idKotaKab : idKotaKabs) {
             if (idKotaKab.getIdProvinsi().equals(idProvinsi)) {
-                mList.add(StringUtilKt.toTitleCase(idKotaKab.getName()));
+                mList.add(UiHelper.INSTANCE.toTitleCase(idKotaKab.getName()));
                 mId.add(idKotaKab.getId());
             }
         }
@@ -494,7 +494,7 @@ public class RegisterActivity extends AppCompatActivity {
         List<String> mId = new ArrayList<>();
         for (IdKecamatan idKecamatan : idKecamatans) {
             if (idKecamatan.getIdKotaKab().equals(idKotaKab)) {
-                mList.add(StringUtilKt.toTitleCase(idKecamatan.getName()));
+                mList.add(UiHelper.INSTANCE.toTitleCase(idKecamatan.getName()));
                 mId.add(idKecamatan.getId());
             }
         }
@@ -512,7 +512,7 @@ public class RegisterActivity extends AppCompatActivity {
         List<String> mId = new ArrayList<>();
         for (IdDesa idDesa : idDesas) {
             if (idDesa.getIdKecamatan().equals(idKecamatan)) {
-                mList.add(StringUtilKt.toTitleCase(idDesa.getName()));
+                mList.add(UiHelper.INSTANCE.toTitleCase(idDesa.getName()));
                 mId.add(idDesa.getId());
             }
         }
