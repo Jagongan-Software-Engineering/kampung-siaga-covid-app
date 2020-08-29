@@ -1,84 +1,70 @@
-package com.seadev.aksi.service;
+package com.seadev.aksi.service
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Intent
+import android.media.RingtoneManager
+import android.os.Build
+import android.util.Log
+import androidx.core.app.NotificationCompat
+import com.google.firebase.messaging.FirebaseMessagingService
+import com.google.firebase.messaging.RemoteMessage
+import com.seadev.aksi.R
+import com.seadev.aksi.ui.MainActivity
+import com.seadev.aksi.ui.SurveyActivity
 
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.media.RingtoneManager;
-import android.net.Uri;
-import android.os.Build;
-import android.util.Log;
-
-import com.google.firebase.messaging.FirebaseMessagingService;
-import com.google.firebase.messaging.RemoteMessage;
-import com.seadev.aksi.R;
-import com.seadev.aksi.ui.MainActivity;
-import com.seadev.aksi.ui.SurveyActivity;
-
-import androidx.annotation.NonNull;
-import androidx.core.app.NotificationCompat;
-
-public class ReminderService extends FirebaseMessagingService {
-
-    private String TAG = "ReminderService";
-
-    public ReminderService() {
+class ReminderService : FirebaseMessagingService() {
+    companion object {
+        const val TAG = "ReminderService"
+        const val CHANNEL_ID = "Reminder"
+        const val CHANNEL_NAME = "Reminder Notification"
     }
 
-    @Override
-    public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
-        super.onMessageReceived(remoteMessage);
-        if (remoteMessage.getNotification() != null) {
-            String topics = remoteMessage.getFrom().split("/")[2];
-            Log.d(TAG, "Notif Token: " + topics);
-            sendNotification(remoteMessage.getNotification(), topics);
+    private var notifyId = 0
+
+    override fun onMessageReceived(remoteMessage: RemoteMessage) {
+        super.onMessageReceived(remoteMessage)
+        if (remoteMessage.notification != null) {
+            val topics = remoteMessage.from!!.split("/".toRegex()).toTypedArray()[2]
+            Log.d(TAG, "Notif Token: $topics")
+            sendNotification(remoteMessage.notification, topics)
         }
     }
 
-    @Override
-    public void onNewToken(@NonNull String s) {
-        super.onNewToken(s);
-        Log.d(TAG, "Refreshed token: " + s);
+    override fun onNewToken(s: String) {
+        super.onNewToken(s)
+        Log.d(TAG, "Refreshed token: $s")
     }
 
-    private void sendNotification(RemoteMessage.Notification mNotif, String topics) {
-        String channelId = getString(R.string.default_notification_channel_id);
-        String channelName = getString(R.string.default_notification_channel_name);
-        Class activity;
-        if (topics.equals("update")) {
-            activity = MainActivity.class;
+    private fun sendNotification(mNotif: RemoteMessage.Notification?, topics: String) {
+        notifyId++
+        val activity = if (topics == "update") {
+            MainActivity::class.java
         } else {
-            activity = SurveyActivity.class;
+            SurveyActivity::class.java
         }
-        Intent intent = new Intent(this, activity);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
-                PendingIntent.FLAG_ONE_SHOT);
-        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder =
-                new NotificationCompat.Builder(this, channelId)
-                        .setSmallIcon(R.drawable.ic_forground)
-                        .setContentTitle(mNotif.getTitle())
-                        .setContentText(mNotif.getBody())
-                        .setAutoCancel(true)
-                        .setSound(defaultSoundUri)
-                        .setContentIntent(pendingIntent);
-        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        val intent = Intent(this, activity)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent,
+                PendingIntent.FLAG_ONE_SHOT)
+        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+        val notificationBuilder = NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_forground)
+                .setContentTitle(mNotif!!.title)
+                .setContentText(mNotif.body)
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setSound(defaultSoundUri)
+                .setContentIntent(pendingIntent)
+        val mNotificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             /* Create or update. */
-            NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH);
-            notificationBuilder.setChannelId(channelId);
-            if (mNotificationManager != null) {
-                mNotificationManager.createNotificationChannel(channel);
-            }
+            val channel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH)
+            notificationBuilder.setChannelId(CHANNEL_ID)
+            mNotificationManager.createNotificationChannel(channel)
         }
-        Notification notification = notificationBuilder.build();
-        if (mNotificationManager != null) {
-            mNotificationManager.notify(0, notification);
-        }
-
+        val notification = notificationBuilder.build()
+        mNotificationManager.notify(notifyId, notification)
     }
 }
