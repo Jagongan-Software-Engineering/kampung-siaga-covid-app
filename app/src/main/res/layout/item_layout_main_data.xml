@@ -50,9 +50,8 @@
                 android:id="@+id/tvNewConfirm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvTitlePositif"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/tvConfirm"
                 android:layout_toEndOf="@id/tvConfirm"
                 android:textColor="@color/colorAccent" />
 
@@ -106,9 +105,8 @@
                 android:id="@+id/tvNewRecover"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvTitleRecover"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_below="@id/tvRecover"
+                android:layout_alignParentStart="true"
                 android:layout_toEndOf="@id/tvRecover"
                 android:textColor="@color/colorAccent" />
 
@@ -162,9 +160,8 @@
                 android:id="@+id/tvNewInCare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvTitleInCare"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_below="@id/tvInCare"
+                android:layout_alignParentStart="true"
                 android:layout_toEndOf="@id/tvInCare"
                 android:textColor="@color/colorAccent" />
 
@@ -218,9 +215,8 @@
                 android:id="@+id/tvNewDied"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvTitleDied"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_below="@id/tvDied"
+                android:layout_alignParentStart="true"
                 android:layout_toEndOf="@id/tvDied"
                 android:textColor="@color/colorAccent" />
 

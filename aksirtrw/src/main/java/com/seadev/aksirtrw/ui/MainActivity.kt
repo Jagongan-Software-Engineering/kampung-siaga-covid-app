@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.data.PieData
@@ -26,7 +27,7 @@ import com.seadev.aksi.model.requestbody.ItemIdProvinsi
 import com.seadev.aksi.rest.ApiClientLokasi
 import com.seadev.aksi.rest.ApiInterfaceFirebase
 import com.seadev.aksi.util.DateFormater
-import com.seadev.aksi.util.toTitleCase
+import com.seadev.aksi.util.UiHelper.toTitleCase
 import com.seadev.aksirtrw.R
 import com.seadev.aksirtrw.adapter.DailyReportAdapter
 import com.seadev.aksirtrw.model.Assessment
@@ -193,9 +194,9 @@ class MainActivity : AppCompatActivity() {
                     Log.d(TAG, "onChildAdded:success")
                     for (postSnapshot in dataSnapshot.children) {
                         Log.d(TAG, "dataSnapshot.children.count: ${dataSnapshot.children.count()}")
-                        val asesment = postSnapshot.getValue(Assessment::class.java)
-                        updateDataRanged(asesment)
-                        todayAssessmentReport.add(asesment!!)
+                        val assessment = postSnapshot.getValue(Assessment::class.java)
+                        updateDataRanged(assessment)
+                        todayAssessmentReport.add(assessment!!)
                         dailyAdapter.notifyDataSetChanged()
                         if (total == dataSnapshot.children.count()) initDataRanged()
                     }
@@ -247,16 +248,16 @@ class MainActivity : AppCompatActivity() {
         )
 
         val colorList = listOf(
-                resources.getColor(android.R.color.holo_green_light),
-                resources.getColor(android.R.color.holo_orange_light),
-                resources.getColor(android.R.color.holo_red_light)
+                ContextCompat.getColor(this, android.R.color.holo_green_light),
+                ContextCompat.getColor(this, android.R.color.holo_orange_light),
+                ContextCompat.getColor(this, android.R.color.holo_red_light)
         )
 
         val pieDataSet = PieDataSet(pieEntry, "")
-        pieDataSet.apply {
-            colors = colorList
-            setDrawValues(false)
-        }
+                .apply {
+                    colors = colorList
+                    setDrawValues(false)
+                }
 
         val pieData = PieData(pieDataSet)
         pieCartRanged.apply {

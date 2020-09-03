@@ -21,13 +21,17 @@ class PreventionStepActivity : AppCompatActivity() {
 
         val data = intent.getParcelableExtra<TopikPencegahan>(STEP_DATA_EXTRA)
 
-        supportActionBar?.title = data.namaTopik
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.apply {
+            title = data!!.namaTopik
+            setDisplayHomeAsUpEnabled(true)
+        }
 
-        cardSliderViewPager.adapter = PreventionStepAdapter(this, data)
-        cardSliderViewPager.smallAlphaFactor = 0.9f
-        cardSliderViewPager.smallAlphaFactor = 0.5f
-        cardSliderViewPager.autoSlideTime = CardSliderViewPager.STOP_AUTO_SLIDING
+        cardSliderViewPager.apply {
+            adapter = PreventionStepAdapter(this@PreventionStepActivity, data!!)
+            smallAlphaFactor = 0.9f
+            smallAlphaFactor = 0.5f
+            autoSlideTime = CardSliderViewPager.STOP_AUTO_SLIDING
+        }
         cardSliderIndicator.indicatorsToShow = CardSliderIndicator.UNLIMITED_INDICATORS
     }
 

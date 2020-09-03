@@ -7,89 +7,94 @@
     android:orientation="vertical"
     tools:context=".ui.MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        style="@style/Toolbar"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:layout_height="wrap_content">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-            <ImageView
-                android:id="@+id/imageIttp"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:padding="16dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/iitpeh" />
-
-            <ImageView
-                android:id="@+id/imageToolBar"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="-12dp"
-                android:layout_toEndOf="@id/imageIttp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_forground" />
-
-            <TextView
-                android:id="@+id/titleToolbar"
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="-8dp"
-                android:layout_marginTop="6dp"
-                android:layout_toEndOf="@id/imageToolBar"
-                android:text="@string/app_name"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="28sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/titleToolbar"
-                android:layout_marginStart="-8dp"
-                android:layout_marginTop="-5dp"
-                android:layout_marginBottom="4dp"
-                android:layout_toEndOf="@id/imageToolBar"
-                android:text="@string/app_sub_name"
-                android:textColor="@color/colorPrimary"
-                android:textSize="5sp"
-                android:textStyle="bold" />
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                app:cardBackgroundColor="#332E09D1"
-                app:cardCornerRadius="15dp"
-                app:cardElevation="0dp"
-                app:cardUseCompatPadding="true">
+                android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/iconUser"
-                    style="@style/ItemsTouchable"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center_vertical"
-                    android:padding="8dp"
+                    android:id="@+id/imageIttp"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:padding="16dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_user" />
+                    android:src="@drawable/iitpeh" />
 
-            </androidx.cardview.widget.CardView>
+                <ImageView
+                    android:id="@+id/imageToolBar"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="-12dp"
+                    android:layout_toEndOf="@id/imageIttp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_forground" />
 
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/titleToolbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="-8dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_toEndOf="@id/imageToolBar"
+                    android:text="@string/app_name"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="28sp"
+                    android:textStyle="bold" />
 
-    </androidx.appcompat.widget.Toolbar>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/titleToolbar"
+                    android:layout_marginStart="-8dp"
+                    android:layout_marginTop="-5dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_toEndOf="@id/imageToolBar"
+                    android:text="@string/app_sub_name"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="5sp"
+                    android:textStyle="bold" />
 
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    app:cardBackgroundColor="#332E09D1"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="0dp"
+                    app:cardUseCompatPadding="true">
+
+                    <ImageView
+                        android:id="@+id/iconUser"
+                        style="@style/ItemsTouchable"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:padding="8dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_user" />
+
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
