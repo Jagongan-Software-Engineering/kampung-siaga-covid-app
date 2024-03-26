@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.AksiKampungSiagaCovid" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.AksiKampungSiagaCovid.Starter" parent="Theme.AksiKampungSiagaCovid">
+        <item name="windowSplashScreenBackground">@android:color/transparent</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="postSplashScreenTheme">@style/Theme.SplashScreen</item>
+    </style>
+</resources>

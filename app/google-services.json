@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "743770976052",
+    "project_id": "aksi---aplikasi-kampung-siaga",
+    "storage_bucket": "aksi---aplikasi-kampung-siaga.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:743770976052:android:4e5ba4bb57d322e165ff61",
+        "android_client_info": {
+          "package_name": "com.seadev.aksi.model"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "743770976052-aeas549ehfh219rl77gm351ucp4m0rq5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.seadev.aksi.model",
+            "certificate_hash": "3ccd6d981860a8ea19a9eaa59ea6c155734349de"
+          }
+        },
+        {
+          "client_id": "743770976052-0e5ait53usue2hs9hgeilstefulhkrjg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfL03AgzDwwjINqV7-Sbfj9H0ohZP1hHI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "743770976052-0e5ait53usue2hs9hgeilstefulhkrjg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
