@@ -18,4 +18,5 @@ Aksi memilki beberapa **fitur utama** seperti **update data covid-19** di Indone
 
 Aplikasi Aksi ini diharapkan dapat bermanfaat untuk masyarakat Indonesia
 
-Kamu bisa `download` beta version dari **Aksi** [disini](https://drive.google.com/drive/u/1/folders/1ex77WFm3_sdT_IvaChkol1vbaBEwByIX)
+Kamu bisa `download` beta version dari **Aksi** [disini](https://drive.google.com/drive/folders/1AEU2KHBaiReS-QUZnjWIrhyfC7aiNPqP?usp=sharing)
+
